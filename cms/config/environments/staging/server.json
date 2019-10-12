@@ -1,6 +1,6 @@
 {
-  "host": "localhost",
-  "port": "${process.env.PORT || 1337}",
+  "host": "sergeylukin.insomnia247.nl",
+  "port": "${process.env.PORT || 5444}",
   "production": true,
   "proxy": {
     "enabled": false
