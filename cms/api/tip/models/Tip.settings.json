@@ -1,0 +1,39 @@
+{
+  "connection": "default",
+  "collectionName": "tips",
+  "info": {
+    "name": "tip",
+    "description": "Yay Tips!"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": [
+      "created_at",
+      "updated_at"
+    ],
+    "comment": ""
+  },
+  "attributes": {
+    "title": {
+      "minLength": 10,
+      "required": true,
+      "unique": true,
+      "type": "string"
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload"
+    },
+    "author": {
+      "model": "user",
+      "via": "tips",
+      "plugin": "users-permissions"
+    },
+    "content": {
+      "minLength": 10,
+      "required": true,
+      "type": "richtext"
+    }
+  }
+}
