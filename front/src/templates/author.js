@@ -1,6 +1,10 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
+import ReactMarkdown from 'react-markdown'
+
 import Layout from '../components/layout'
+
+import "../styles/global.css"
 
 const UserTemplate = ({ data }) => (
     <Layout>
@@ -11,7 +15,13 @@ const UserTemplate = ({ data }) => (
             <h2>
               <Link to={`/Tip_${tip.id}`}>{tip.title}</Link>
             </h2>
-            <p>{tip.content}</p>
+            <ReactMarkdown
+              source={tip.content.substring(0, 500).concat("...")}
+              transformImageUri={uri => uri.startsWith('http') ? uri : `${process.env.IMAGE_BASE_URL}${uri}`}
+              className={ "indexTip" }
+              escapeHtml={false}
+            />
+            <Link to={`/Tip_${tip.id}`}>{ "Read more" }</Link>
           </li>
         ))}
       </ul>

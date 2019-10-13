@@ -1,0 +1,24 @@
+.indexTip {
+  max-height: 250px;
+  overflow: hidden;
+}
+
+.indexTip img {
+  display: none;
+}
+
+.tipContent img {
+  display: block;
+  margin: 0 auto;
+  width: 400px;
+}
+
+  .tipContent .small {
+    width: 100%;
+    max-width: 250px;
+  }
+
+  .tipContent .large {
+    width: 100%;
+    max-width: 600px;
+  }
