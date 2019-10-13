@@ -1,3 +1,7 @@
 {
-  "myCustomConfiguration": "This configuration is accessible through strapi.config.myCustomConfiguration"
+  "myCustomConfiguration": "This configuration is accessible through strapi.config.myCustomConfiguration",
+  "staticWebsiteBuildURLs": [
+    "https://api.netlify.com/build_hooks/5da25cfd9b1214d1a10deb58",
+    "https://api.netlify.com/build_hooks/5da265fc67d7628adce304a3"
+  ]
 }
