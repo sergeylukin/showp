@@ -57,7 +57,8 @@ exports.createPages = ({ actions, graphql }) => {
           component: path.resolve(`src/templates/tip.js`),
           context: {
             id: node.id,
-            locale
+            locale,
+            localessPath: url
           },
         });
       })
@@ -90,7 +91,8 @@ exports.createPages = ({ actions, graphql }) => {
           context: {
             id: node.id,
             id_integer: parseInt(node.id.replace("User_", '')),
-            locale
+            locale,
+            localessPath: url
           },
         }
 
@@ -121,7 +123,8 @@ exports.onCreatePage = ({ page, actions }) => {
         ...page,
         path: localizedPath,
         context: {
-          locale
+          locale,
+          localessPath: page.path
         }
       })
     })

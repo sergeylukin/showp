@@ -6,16 +6,18 @@ import Layout from '../components/layout'
 
 import "../styles/global.css"
 import Link from "../components/localizedLink"
+import SEO from "../components/seo"
 
-const UserTemplate = ({ pageContext: { locale }, data }) => {
+const UserTemplate = ({ pageContext, data }) => {
   return (
-    <Layout locale={locale}>
+    <Layout  pageContext={pageContext}>
+      <SEO title={`Author page of ${data.strapiUser.username}`} />
       <h1>{data.strapiUser.username}</h1>
       <ul>
         {data.allStrapiTip.edges.map(({node}) => (
           <li key={node.id}>
             <h2>
-              <Link to={`/${node.id}`} locale={locale}>{node.title}</Link>
+              <Link to={`/${node.id}`}>{node.title}</Link>
             </h2>
             <ReactMarkdown
               source={node.content.substring(0, 500).concat("...")}

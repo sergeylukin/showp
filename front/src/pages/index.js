@@ -10,24 +10,24 @@ import Link from "../components/localizedLink"
 
 import "../styles/global.css"
 
-const IndexPage = ({ pageContext: { locale }, data }) => {
+const IndexPage = ({ pageContext, data }) => {
   return (
-    <Layout locale={locale}>
+    <Layout pageContext={pageContext}>
       <SEO title="Home" />
       <h1><FormattedMessage id="hello" /></h1>
       <ul>
-        {data.allStrapiTip.edges.map(document => {
-          const isTipHasImage = document.node.image
+        {data.allStrapiTip.edges.map(doc => {
+          const isTipHasImage = doc.node.hasOwnProperty('image')
           return (
-            <li key={document.id}>
+            <li key={doc.id}>
               <h2>
-                <Link to={`/${document.node.id}`}>
-                  {document.node.title}
+                <Link to={`/${doc.node.id}`}>
+                  {doc.node.title}
                 </Link>
               </h2>
-              {isTipHasImage && <Img fixed={document.node.image.childImageSharp.fixed} />}
+              {isTipHasImage && <Img fixed={doc.node.image.childImageSharp.fixed} />}
               <ReactMarkdown
-                source={document.node.content.substring(0, 500).concat("...")}
+                source={doc.node.content.substring(0, 500).concat("...")}
                 transformImageUri={uri => uri.startsWith('http') ? uri : `${process.env.IMAGE_BASE_URL}${uri}`}
                 className={ "indexTip" }
                 escapeHtml={false}
@@ -36,8 +36,6 @@ const IndexPage = ({ pageContext: { locale }, data }) => {
           )
         })}
       </ul>
-
-      <Link to="/page-2/">Go to page 2</Link>
     </Layout>
   )
 }

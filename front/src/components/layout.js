@@ -24,7 +24,12 @@ const {
   Provider: LocaleProvider
 } = LocaleContext
 
-const Layout = ({ locale, children }) => {
+export const PathContext = React.createContext()
+const {
+  Provider: PathProvider
+} = PathContext
+
+const Layout = ({ pageContext: {locale, localessPath},  children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -38,20 +43,22 @@ const Layout = ({ locale, children }) => {
   return (
     <IntlProvider locale={locale}  messages={messages[locale]}>
       <LocaleProvider value={{locale}}>
-        <Header siteTitle={data.site.siteMetadata.title} />
-        <div
-          style={{
-            margin: `0 auto`,
-            maxWidth: 960,
-            padding: `0px 1.0875rem 1.45rem`,
-            paddingTop: 0,
-          }}
-        >
-          <main>{children}</main>
-          <footer>
-            © {new Date().getFullYear()}, Yay.tips
-          </footer>
-        </div>
+        <PathProvider value={{localessPath}}>
+          <Header siteTitle={data.site.siteMetadata.title} />
+          <div
+            style={{
+              margin: `0 auto`,
+              maxWidth: 960,
+              padding: `0px 1.0875rem 1.45rem`,
+              paddingTop: 0,
+            }}
+          >
+            <main>{children}</main>
+            <footer>
+              © {new Date().getFullYear()}, Yay.tips
+            </footer>
+          </div>
+        </PathProvider>
       </LocaleProvider>
     </IntlProvider>
   )

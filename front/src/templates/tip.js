@@ -5,11 +5,15 @@ import ReactMarkdown from 'react-markdown'
 
 import Layout from '../components/layout' 
 import Link from "../components/localizedLink"
+import SEO from "../components/seo"
 
-const TipTemplate = ({ pageContext: { locale }, data }) => {
-  const isTipHasImage = data.strapiTip.image
+const TipTemplate = (props) => {
+  const { pageContext, data } = props
+  const isTipHasImage = data.strapiTip.hasOwnProperty('image')
+
   return (
-    <Layout locale={locale}>
+    <Layout pageContext={pageContext} >
+      <SEO title={`${data.strapiTip.title}`} />
       <h1>{data.strapiTip.title}</h1>
       <p>by <Link to={`/authors/User_${data.strapiTip.author.id}`}>{data.strapiTip.author.username}</Link></p>
       {isTipHasImage && <Img fluid={data.strapiTip.image.childImageSharp.fluid}/>}
