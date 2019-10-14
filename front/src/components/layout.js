@@ -8,11 +8,23 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import { IntlProvider } from 'react-intl'
 
 import Header from "./header"
 import "./layout.css"
 
-const Layout = ({ children }) => {
+// Messages
+import en_US from '../i18n/en-US.json'
+import ru_RU from '../i18n/ru-RU.json'
+
+const messages = { 'en-US': en_US, 'ru-RU': ru_RU }
+
+export const LocaleContext = React.createContext()
+const {
+  Provider: LocaleProvider
+} = LocaleContext
+
+const Layout = ({ locale, children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -24,22 +36,24 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0px 1.0875rem 1.45rem`,
-          paddingTop: 0,
-        }}
-      >
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Yay.tips
-        </footer>
-      </div>
-    </>
+    <IntlProvider locale={locale}  messages={messages[locale]}>
+      <LocaleProvider value={{locale}}>
+        <Header siteTitle={data.site.siteMetadata.title} />
+        <div
+          style={{
+            margin: `0 auto`,
+            maxWidth: 960,
+            padding: `0px 1.0875rem 1.45rem`,
+            paddingTop: 0,
+          }}
+        >
+          <main>{children}</main>
+          <footer>
+            © {new Date().getFullYear()}, Yay.tips
+          </footer>
+        </div>
+      </LocaleProvider>
+    </IntlProvider>
   )
 }
 

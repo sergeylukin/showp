@@ -8,6 +8,8 @@
 
 const path = require(`path`);
 
+const locales = require('./src/constants/locales')
+
 const makeRequest = (graphql, request) => new Promise((resolve, reject) => {
   // Query for nodes to use in creating pages.
   resolve(
@@ -32,20 +34,33 @@ exports.createPages = ({ actions, graphql }) => {
         edges {
           node {
             id
+            locale {
+              id
+              code
+            }
           }
         }
       }
     }
     `).then(result => {
-    // Create pages for each article.
+    // Create pages for each tip.
     result.data.allStrapiTip.edges.forEach(({ node }) => {
-      createPage({
-        path: `/${node.id}`,
-        component: path.resolve(`src/templates/tip.js`),
-        context: {
-          id: node.id,
-        },
-      });
+      Object.keys(locales).map(locale => {
+        if (node.locale.code !== locale) return null
+        const url = `/${node.id}`
+        const localizedPath = locales[locale].default
+          ? url
+          : `/${locales[locale].path}${url}`
+
+        return createPage({
+          path: localizedPath,
+          component: path.resolve(`src/templates/tip.js`),
+          context: {
+            id: node.id,
+            locale
+          },
+        });
+      })
     });
   });
 
@@ -55,6 +70,7 @@ exports.createPages = ({ actions, graphql }) => {
         edges {
           node {
             id
+            username
           }
         }
       }
@@ -62,13 +78,24 @@ exports.createPages = ({ actions, graphql }) => {
     `).then(result => {
     // Create pages for each user.
     result.data.allStrapiUser.edges.forEach(({ node }) => {
-      createPage({
-        path: `/authors/${node.id}`,
-        component: path.resolve(`src/templates/author.js`),
-        context: {
-          id: node.id,
-        },
-      });
+      Object.keys(locales).map(locale => {
+        const url = `/authors/${node.id}`
+        const localizedPath = locales[locale].default
+          ? url
+          : `/${locales[locale].path}${url}`
+
+        const page = {
+          path: localizedPath,
+          component: path.resolve(`src/templates/author.js`),
+          context: {
+            id: node.id,
+            id_integer: parseInt(node.id.replace("User_", '')),
+            locale
+          },
+        }
+
+        return createPage(page);
+      })
     });
   });
 
@@ -78,3 +105,27 @@ exports.createPages = ({ actions, graphql }) => {
     getAuthors,
   ]);
 };
+
+exports.onCreatePage = ({ page, actions }) => {
+  const { createPage, deletePage } = actions
+
+  return new Promise(resolve => {
+    deletePage(page)
+
+    Object.keys(locales).map(locale => {
+      const localizedPath = locales[locale].default
+        ? page.path
+        : `/${locales[locale].path}${page.path}`
+
+      return createPage({
+        ...page,
+        path: localizedPath,
+        context: {
+          locale
+        }
+      })
+    })
+
+    resolve()
+  })
+}

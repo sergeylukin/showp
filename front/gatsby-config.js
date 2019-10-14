@@ -20,7 +20,7 @@ module.exports = {
           ? `https://app.yay.tips`
           : `http://localhost:1337`,
         queryLimit: 1000, // Default to 100
-        contentTypes: [`tip`, `user`],
+        contentTypes: [`tip`, `user`, `locale`],
         // Possibility to login with a strapi user, when content types are not publically available (optional).
         // loginData: {
         //   identifier: "",
