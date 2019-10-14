@@ -34,6 +34,10 @@
       "minLength": 10,
       "required": true,
       "type": "richtext"
+    },
+    "locale": {
+      "model": "locale",
+      "via": "tips"
     }
   }
 }

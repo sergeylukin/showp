@@ -1,0 +1,29 @@
+{
+  "connection": "default",
+  "collectionName": "locales",
+  "info": {
+    "name": "locale",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "name": {
+      "unique": true,
+      "required": true,
+      "type": "string"
+    },
+    "code": {
+      "unique": true,
+      "required": true,
+      "type": "string"
+    },
+    "tips": {
+      "collection": "tip",
+      "via": "locale"
+    }
+  }
+}
