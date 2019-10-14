@@ -15,8 +15,6 @@ const IndexPage = ({ pageContext: { locale }, data }) => {
     <Layout locale={locale}>
       <SEO title="Home" />
       <h1><FormattedMessage id="hello" /></h1>
-      <p>Welcome to your new Gatsby site.</p>
-      <p>Now go build something great.</p>
       <ul>
         {data.allStrapiTip.edges.map(document => {
           const isTipHasImage = document.node.image

@@ -8,7 +8,6 @@ import "../styles/global.css"
 import Link from "../components/localizedLink"
 
 const UserTemplate = ({ pageContext: { locale }, data }) => {
-  console.log(data)
   return (
     <Layout locale={locale}>
       <h1>{data.strapiUser.username}</h1>
@@ -16,7 +15,7 @@ const UserTemplate = ({ pageContext: { locale }, data }) => {
         {data.allStrapiTip.edges.map(({node}) => (
           <li key={node.id}>
             <h2>
-              <Link to={`/Tip_${node.id}`} locale={locale}>{node.title}</Link>
+              <Link to={`/${node.id}`} locale={locale}>{node.title}</Link>
             </h2>
             <ReactMarkdown
               source={node.content.substring(0, 500).concat("...")}
@@ -24,7 +23,7 @@ const UserTemplate = ({ pageContext: { locale }, data }) => {
               className={ "indexTip" }
               escapeHtml={false}
             />
-            <Link to={`/Tip_${node.id}`}>{ "Read more" }</Link>
+            <Link to={`/${node.id}`}>{ "Read more" }</Link>
           </li>
         ))}
       </ul>
