@@ -42,7 +42,7 @@ const Layout = ({ pageContext: {locale, localessPath},  children }) => {
 
   return (
     <IntlProvider locale={locale}  messages={messages[locale]}>
-      <LocaleProvider value={{locale}}>
+      <LocaleProvider value={{currentLocale: locale}}>
         <PathProvider value={{localessPath}}>
           <Header siteTitle={data.site.siteMetadata.title} />
           <div

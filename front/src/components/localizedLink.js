@@ -6,7 +6,7 @@ import useLocale from '../hooks/useLocale'
 
 export default ({ to, locale, ...props }) => {
   if (!locale) {
-    locale = useLocale()['locale']
+    locale = useLocale()['currentLocale']
   }
   const ISO_639_1 = locales[locale].path
   const path = locales[locale].default ? to : `/${ISO_639_1}${to}`
