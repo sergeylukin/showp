@@ -1,5 +1,5 @@
 'use strict';
-
+const slug = require('limax');
 const axios = require('axios');
 
 const triggerStaticWebsitesBuild = () => {
@@ -51,6 +51,12 @@ module.exports = {
   // Before creating a value.
   // Fired before an `insert` query.
   // beforeCreate: async (model, attrs, options) => {},
+  // beforeCreate: async (model, attrs, options) => {
+  beforeCreate: async (model) => {
+    model.set({
+      slug:  slug(model.get('title'))
+    });
+  },
 
   // After creating a value.
   // Fired after an `insert` query.

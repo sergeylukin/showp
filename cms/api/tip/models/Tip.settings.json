@@ -38,6 +38,9 @@
     "locale": {
       "model": "locale",
       "via": "tips"
+    },
+    "slug": {
+      "type": "string"
     }
   }
 }
