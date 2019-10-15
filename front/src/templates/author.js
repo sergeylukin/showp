@@ -17,7 +17,7 @@ const UserTemplate = ({ pageContext, data }) => {
         {data.allStrapiTip.edges.map(({node}) => (
           <li key={node.id}>
             <h2>
-              <Link to={`/${node.id}`}>{node.title}</Link>
+              <Link to={`/${node.slug}`}>{node.title}</Link>
             </h2>
             <ReactMarkdown
               source={node.content.substring(0, 500).concat("...")}
@@ -25,7 +25,7 @@ const UserTemplate = ({ pageContext, data }) => {
               className={ "indexTip" }
               escapeHtml={false}
             />
-            <Link to={`/${node.id}`}>{ "Read more" }</Link>
+            <Link to={`/${node.slug}`}>{ "Read more" }</Link>
           </li>
         ))}
       </ul>
@@ -50,6 +50,7 @@ export const query = graphql`
           id
           title
           content
+          slug
         }
       }
     }

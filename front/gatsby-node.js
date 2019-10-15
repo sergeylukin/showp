@@ -34,6 +34,7 @@ exports.createPages = ({ actions, graphql }) => {
         edges {
           node {
             id
+            slug
             locale {
               id
               code
@@ -46,8 +47,8 @@ exports.createPages = ({ actions, graphql }) => {
     // Create pages for each tip.
     result.data.allStrapiTip.edges.forEach(({ node }) => {
       Object.keys(locales).map(locale => {
-        if (node.locale.code !== locale) return null
-        const url = `/${node.id}`
+        if (!node || !node.locale || node.locale.code !== locale) return null
+        const url = `/${node.slug}`
         const localizedPath = locales[locale].default
           ? url
           : `/${locales[locale].path}${url}`

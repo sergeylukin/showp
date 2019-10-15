@@ -21,7 +21,7 @@ const IndexPage = ({ pageContext, data }) => {
           return (
             <li key={doc.id}>
               <h2>
-                <Link to={`/${doc.node.id}`}>
+                <Link to={`/${doc.node.slug}`}>
                   {doc.node.title}
                 </Link>
               </h2>
@@ -51,6 +51,7 @@ export const pageQuery = graphql`
         node {
           id
           title
+          slug
           locale {
             code
           }
