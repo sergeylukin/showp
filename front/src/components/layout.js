@@ -11,6 +11,8 @@ import { useStaticQuery, graphql } from "gatsby"
 import { IntlProvider } from 'react-intl'
 import Headroom from 'react-headroom'
 import { Grommet } from 'grommet';
+import { normalizeColor } from 'grommet/utils';
+import { rgba } from 'polished';
 
 import Header from "./header"
 import "./layout.css"
@@ -37,6 +39,8 @@ const theme = {
     colors: {
       'light-1': 'white',
       'light-2': '#f5f5f5',
+      'light-3': 'rgba(0, 0, 0, 0.87)',
+      'primary': 'green',
       'text': {
         light: 'rgba(0, 0, 0, 0.87)',
       },
@@ -46,10 +50,34 @@ const theme = {
     },
     elevation: {
       light: {
-        // medium: '0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)',
-        medium: '0 1px 2px 0 rgba(31,45,61,.15)',
+        minimal: '0 1px 2px 0 rgba(31,45,61,.15)',
       },
     },
+  },
+  button: {
+    border: {
+      width: '1px',
+      radius: '4px',
+    },
+    padding: {
+      vertical: '8px',
+      horizontal: '16px',
+    },
+    extend: props => `
+     text-transform: uppercase;
+     font-size: 0.875rem;
+     font-weight: 500;
+     line-height: normal;
+
+    ${!props.primary && `
+      border-color: ${rgba(normalizeColor(props.colorValue, props.theme), 0.5)};
+      color: ${normalizeColor(props.colorValue, props.theme)};
+      :hover {
+         box-shadow: none;
+         background-color: ${rgba(normalizeColor(props.colorValue, props.theme), 0.08)};
+       }
+     `}
+   `,
   },
 };
 

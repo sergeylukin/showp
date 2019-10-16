@@ -1,6 +1,6 @@
 import PropTypes from "prop-types"
 import React from "react"
-import { Box } from 'grommet';
+import { Box, Button } from 'grommet';
 
 import locales from '../constants/locales'
 import Link from "../components/localizedLink"
@@ -15,7 +15,7 @@ const AppBar = (props) => (
     justify='between'
     background='light-1'
     pad={{ vertical: 'small', horizontal: 'medium' }}
-    elevation='medium'
+    elevation='minimal'
     {...props}
   />
 )
@@ -43,12 +43,8 @@ const Header = ({ siteTitle }) => {
                 const item = locales[locale]
                 const isCurrentLocale = locale === currentLocale
                 return (
-                  <Link to={localessPath} locale={locale}>
-                    {isCurrentLocale ? (
-                    <big>{item.title}</big>
-                    ) : (
-                      <small>{item.title}</small>
-                    )}
+                  <Link to={localessPath} locale={locale} style={{margin: '0 .5rem'}}>
+                    <Button color="light-3" active={isCurrentLocale} label={item.title} />
                   </Link>
                   )
               })}

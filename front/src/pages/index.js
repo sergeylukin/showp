@@ -1,7 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
 import ReactMarkdown from "react-markdown"
-import { FormattedMessage } from 'react-intl'
 
 import Layout from "../components/layout"
 import Img from "gatsby-image"
@@ -14,7 +13,6 @@ const IndexPage = ({ pageContext, data }) => {
   return (
     <Layout pageContext={pageContext}>
       <SEO title="Home" />
-      <h1><FormattedMessage id="hello" /></h1>
       <ul>
         {data.allStrapiTip.edges.map(doc => {
           const isTipHasImage = doc.node.hasOwnProperty('image')
