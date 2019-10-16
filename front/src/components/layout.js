@@ -9,6 +9,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import { IntlProvider } from 'react-intl'
+import Headroom from 'react-headroom'
 
 import Header from "./header"
 import "./layout.css"
@@ -44,7 +45,13 @@ const Layout = ({ pageContext: {locale, localessPath},  children }) => {
     <IntlProvider locale={locale}  messages={messages[locale]}>
       <LocaleProvider value={{currentLocale: locale}}>
         <PathProvider value={{localessPath}}>
-          <Header siteTitle={data.site.siteMetadata.title} />
+          <Headroom
+            upTolerance={10}
+            downTolerance={10}
+            style={{zIndex: '20', height: '6.5em'}}
+          >
+            <Header siteTitle={data.site.siteMetadata.title} />
+          </Headroom>
           <div
             style={{
               margin: `0 auto`,
