@@ -1,8 +1,18 @@
+const {
+  NODE_ENV,
+  URL: NETLIFY_SITE_URL = 'https://yay.tips',
+  DEPLOY_PRIME_URL: NETLIFY_DEPLOY_URL = NETLIFY_SITE_URL,
+  CONTEXT: NETLIFY_ENV = NODE_ENV
+} = process.env;
+const isNetlifyProduction = NETLIFY_ENV === 'production';
+const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
+
 module.exports = {
   siteMetadata: {
     title: `Yay.tips`,
     description: `Tips and lifehacks for everyday and everyone`,
     author: `@yaytips`,
+    siteUrl
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -60,5 +70,26 @@ module.exports = {
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-robots-txt`,
+      options: {
+        resolveEnv: () => NETLIFY_ENV,
+        env: {
+          production: {
+            policy: [{ userAgent: '*', disallow: ['/'] }]
+          },
+          'branch-deploy': {
+            policy: [{ userAgent: '*', disallow: ['/'] }],
+            sitemap: null,
+            host: null
+          },
+          'deploy-preview': {
+            policy: [{ userAgent: '*', disallow: ['/'] }],
+            sitemap: null,
+            host: null
+          }
+        }
+      }
+    }
   ],
 };
