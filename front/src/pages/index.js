@@ -12,7 +12,7 @@ import "../styles/global.css"
 const IndexPage = ({ pageContext, data }) => {
   return (
     <Layout pageContext={pageContext}>
-      <SEO title="Home" />
+      <SEO title="Home" lang={pageContext.locale} />
       <ul>
         {data.allStrapiTip.edges.map(doc => {
           const isTipHasImage = doc.node.hasOwnProperty('image')

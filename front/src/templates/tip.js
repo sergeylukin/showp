@@ -13,7 +13,7 @@ const TipTemplate = (props) => {
 
   return (
     <Layout pageContext={pageContext} >
-      <SEO title={`${data.strapiTip.title}`} />
+      <SEO title={`${data.strapiTip.title}`} lang={pageContext.locale} />
       <h1>{data.strapiTip.title}</h1>
       <p>by <Link to={`/authors/User_${data.strapiTip.author.id}`}>{data.strapiTip.author.username}</Link></p>
       {isTipHasImage && <Img fluid={data.strapiTip.image.childImageSharp.fluid}/>}

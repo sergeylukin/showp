@@ -11,7 +11,7 @@ import SEO from "../components/seo"
 const UserTemplate = ({ pageContext, data }) => {
   return (
     <Layout  pageContext={pageContext}>
-      <SEO title={`Author page of ${data.strapiUser.username}`} />
+      <SEO title={`Author page of ${data.strapiUser.username}`} lang={pageContext.locale} />
       <h1>{data.strapiUser.username}</h1>
       <ul>
         {data.allStrapiTip.edges.map(({node}) => (
