@@ -95,9 +95,9 @@ module.exports = {
       resolve: `gatsby-plugin-sitemap`,
       options: {
         exclude: [
-          `/404/`,
+          `/404`,
           `/404.html`,
-          `/ru/404/`,
+          `/ru/404`,
           `/ru/404.html`,
           `/offline-plugin-app-shell-fallback`,
           `/ru/offline-plugin-app-shell-fallback`,
