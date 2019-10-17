@@ -52,7 +52,7 @@ module.exports = {
         short_name: `Yay.tips`,
         start_url: `/`,
         background_color: `#ffffff`,
-        theme_color: `#66d397`,
+        theme_color: `#ffffff`,
         display: `standalone`,
         icon: `src/images/yaytips-icon.png`, // This path is relative to the root of the site.
       },
