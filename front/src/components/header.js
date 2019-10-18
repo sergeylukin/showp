@@ -1,6 +1,6 @@
 import PropTypes from "prop-types"
 import React from "react"
-import { Box, Button, Menu, Text } from 'grommet';
+import { Box, Button, Menu, Text, ResponsiveContext } from 'grommet';
 import { FormDown } from "grommet-icons";
 import { navigate } from "gatsby"
 
@@ -18,7 +18,9 @@ const AppBar = (props) => (
     align='center'
     justify='center'
     background='bg'
-    pad={{ vertical: 'small' }}
+    pad={{
+      vertical: props.size == 'small' ? 'medium' : 'xsmall'
+    }}
     elevation='minimal'
     {...props}
   />
@@ -47,51 +49,62 @@ const Header = ({ siteTitle }) => {
   })}
 
   return (
-    <header>
-      <AppBar>
-        <Box
-          direction='row'
-          width={'large'}
-          align='center'
-          pad={{
-            horizontal: 'large',
-          }}
-        >
-          <Box flex>
-            <Link
-              to="/"
-              style={{
-                textDecoration: `none`,
-                display: 'flex',
+    <ResponsiveContext.Consumer>
+      {size => (
+        <header>
+          <AppBar size={size}>
+            <Box
+              direction='row'
+              width={'large'}
+              align='center'
+              pad={{
+                horizontal: 'large',
               }}
             >
-              <img src={logo} width={100} alt="Logo" />
-            </Link>
-          </Box>
-          <Box direction='row'>
-            <Menu
-              plain
-              items={localeSelectorItems}
-            >
-              {({ drop, hover }) => {
-                const color = hover && !drop ? "primary" : undefined;
-                return (
-                  <Box
-                    direction="row"
-                    gap="small"
-                    pad="small"
-                    background={hover && drop ? "secondary" : undefined}
-                  >
-                    <Text color={color}>{localeSelectorTitle}</Text>
-                    <FormDown color={color} />
-                  </Box>
-                );
-              }}
-            </Menu>
-          </Box>
-        </Box>
-      </AppBar>
-    </header>
+              <Box flex>
+                <Link
+                  to="/"
+                  style={{
+                    textDecoration: `none`,
+                    display: 'flex',
+                  }}
+                >
+                  <img src={logo} width={100} alt="Logo" />
+                </Link>
+              </Box>
+              <Box direction='row'>
+                <Menu
+                  plain
+                  label="SD"
+                  dropProps={{
+                    pad: 'xlarge'
+                  }}
+                  items={localeSelectorItems}
+                >
+                  {({ drop, hover }) => {
+                    const color = hover && !drop ? "primary" : undefined;
+                    return (
+                      <Box
+                        direction="row"
+                        gap="xxsmall"
+                        pad={{
+                          vertical: 'small',
+                          horizontal: 'medium'
+                        }}
+                        background={hover && drop ? "secondary" : undefined}
+                      >
+                        <Text color={color}>{localeSelectorTitle}</Text>
+                        <FormDown color={color} />
+                      </Box>
+                    );
+                  }}
+                </Menu>
+              </Box>
+            </Box>
+          </AppBar>
+        </header>
+      )}
+    </ResponsiveContext.Consumer>
   )
 }
 
