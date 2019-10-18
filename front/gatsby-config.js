@@ -38,6 +38,7 @@ module.exports = {
         showSpinner: true,
       },
     },
+    `gatsby-plugin-netlify`,
     {
       resolve: `gatsby-source-strapi`,
       options: {
