@@ -69,7 +69,7 @@ const Header = ({ siteTitle }) => {
                     display: 'flex',
                   }}
                 >
-                  <img src={logo} width={100} alt="Logo" />
+                  <img src={logo} width={100} height={31} alt="Logo" />
                 </Link>
               </Box>
               <Box direction='row'>
