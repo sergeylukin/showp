@@ -10,7 +10,7 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import { IntlProvider } from 'react-intl'
 import Headroom from 'react-headroom'
-import { Grommet } from 'grommet';
+import { Box, Grommet } from 'grommet';
 import { normalizeColor } from 'grommet/utils';
 import { rgba } from 'polished';
 
@@ -93,26 +93,28 @@ const Layout = ({ pageContext: {locale, localessPath},  children }) => {
       <LocaleProvider value={{currentLocale: locale}}>
         <PathProvider value={{localessPath}}>
           <Grommet theme={theme}>
-            <Headroom
-              upTolerance={10}
-              downTolerance={10}
-              style={{zIndex: '20', height: '6.5em'}}
-            >
-              <Header siteTitle={data.site.siteMetadata.title} />
-            </Headroom>
-            <div
-              style={{
-                margin: `0 auto`,
-                maxWidth: 960,
-                padding: `0px 1.0875rem 1.45rem`,
-                paddingTop: 0,
-              }}
-            >
-              <main>{children}</main>
-              <footer>
-                © {new Date().getFullYear()}, Yay.tips
-              </footer>
-            </div>
+              <Headroom
+                upTolerance={10}
+                downTolerance={10}
+                style={{zIndex: '20'}}
+              >
+                <Header siteTitle={data.site.siteMetadata.title} />
+              </Headroom>
+              <Box align='center'>
+              <Box
+                width={'large'}
+                pad={{
+                  horizontal: 'large',
+                  vertical: 'large',
+                }}
+                alignSelf='center'
+              >
+                <main>{children}</main>
+                <footer>
+                  © {new Date().getFullYear()}, Yay.tips
+                </footer>
+              </Box>
+              </Box>
           </Grommet>
         </PathProvider>
       </LocaleProvider>

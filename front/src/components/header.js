@@ -1,20 +1,22 @@
 import PropTypes from "prop-types"
 import React from "react"
-import { Box, Button } from 'grommet';
+import { Box, Button, Heading } from 'grommet';
 
 import locales from '../constants/locales'
 import Link from "../components/localizedLink"
 import usePath from "../hooks/usePath"
 import useLocale from "../hooks/useLocale"
 
+import logo from "../images/logo.png"
+
 const AppBar = (props) => (
   <Box
     tag='header'
     direction='row'
     align='center'
-    justify='between'
+    justify='center'
     background='bg'
-    pad={{ vertical: 'small', horizontal: 'medium' }}
+    pad={{ vertical: 'small' }}
     elevation='minimal'
     {...props}
   />
@@ -27,17 +29,25 @@ const Header = ({ siteTitle }) => {
   return (
     <header>
       <AppBar>
-          <h1 style={{ margin: 0 }}>
-            <Link
-              to="/"
-              style={{
-                textDecoration: `none`,
-              }}
-            >
-              {siteTitle}
-            </Link>
-          </h1>
-            
+        <Box
+          direction='row'
+          width={'large'}
+          align='center'
+          pad={{
+            horizontal: 'large',
+          }}
+        >
+            <Box flex>
+              <Link
+                to="/"
+                style={{
+                  textDecoration: `none`,
+                  display: 'flex',
+                }}
+              >
+                <img src={logo} width={100} alt="Logo" />
+              </Link>
+            </Box>
             <Box direction='row'>
               {Object.keys(locales).map(locale => {
                 const item = locales[locale]
@@ -49,6 +59,7 @@ const Header = ({ siteTitle }) => {
                   )
               })}
             </Box>
+          </Box>
       </AppBar>
     </header>
   )
