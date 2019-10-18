@@ -13,7 +13,7 @@ const AppBar = (props) => (
     direction='row'
     align='center'
     justify='between'
-    background='light-1'
+    background='bg'
     pad={{ vertical: 'small', horizontal: 'medium' }}
     elevation='minimal'
     {...props}
@@ -44,7 +44,7 @@ const Header = ({ siteTitle }) => {
                 const isCurrentLocale = locale === currentLocale
                 return (
                   <Link to={localessPath} locale={locale} style={{margin: '0 .5rem'}}>
-                    <Button color="light-3" active={isCurrentLocale} label={item.title} />
+                    <Button color="secondary" active={isCurrentLocale} label={item.title} />
                   </Link>
                   )
               })}

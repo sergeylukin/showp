@@ -37,13 +37,9 @@ const {
 const theme = {
   global: {
     colors: {
-      'light-1': 'white',
-      'light-2': '#f5f5f5',
-      'light-3': 'rgba(0, 0, 0, 0.87)',
-      'primary': 'green',
-      'text': {
-        light: 'rgba(0, 0, 0, 0.87)',
-      },
+      'bg': 'white',
+      'primary': '#18a086',
+      'secondary': '#0F6454',
     },
     edgeSize: {
       small: '14px',
