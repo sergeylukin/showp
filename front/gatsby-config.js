@@ -67,6 +67,7 @@ module.exports = {
         background_color: `#ffffff`,
         theme_color: `#ffffff`,
         display: `standalone`,
+        orientation: 'portrait',
         icon: `src/images/yaytips-icon.png`, // This path is relative to the root of the site.
       },
     },
