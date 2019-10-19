@@ -58,7 +58,7 @@ const Header = ({ siteTitle }) => {
               width={'large'}
               align='center'
               pad={{
-                horizontal: 'large',
+                left: 'large',
               }}
             >
               <Box flex>

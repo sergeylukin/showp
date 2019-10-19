@@ -2,6 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import ReactMarkdown from 'react-markdown'
+import { Heading } from 'grommet'
 
 import Layout from '../components/layout' 
 import Link from "../components/localizedLink"
@@ -14,7 +15,7 @@ const TipTemplate = (props) => {
   return (
     <Layout pageContext={pageContext} >
       <SEO title={`${data.strapiTip.title}`} lang={pageContext.locale} />
-      <h1>{data.strapiTip.title}</h1>
+      <Heading mlevel={1} margin={{ top: 'none' }}>{data.strapiTip.title}</Heading>
       <p>by <Link to={`/authors/User_${data.strapiTip.author.id}`}>{data.strapiTip.author.username}</Link></p>
       {isTipHasImage && <Img fluid={data.strapiTip.image.childImageSharp.fluid}/>}
       <ReactMarkdown

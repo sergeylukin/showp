@@ -11,8 +11,6 @@ import { useStaticQuery, graphql } from "gatsby"
 import { IntlProvider } from 'react-intl'
 import Headroom from 'react-headroom'
 import { Box, Grommet } from 'grommet';
-import { normalizeColor } from 'grommet/utils';
-import { rgba } from 'polished';
 
 import Header from "./header"
 import "./layout.css"
@@ -40,6 +38,7 @@ const theme = {
       'bg': '#ffffff',
       'primary': '#18a086',
       'secondary': '#0F6454',
+      'third': '#D11A3F',
     },
     edgeSize: {
       small: '14px',
@@ -71,24 +70,25 @@ const Layout = ({ pageContext: {locale, localessPath},  children }) => {
               <Headroom
                 upTolerance={10}
                 downTolerance={10}
-                style={{zIndex: '20'}}
+                style={{zIndex: '20', height: '60px'}}
               >
                 <Header siteTitle={data.site.siteMetadata.title} />
               </Headroom>
-              <Box align='center'>
-              <Box
-                width={'large'}
-                pad={{
-                  horizontal: 'large',
-                  vertical: 'large',
-                }}
-                alignSelf='center'
-              >
-                <main>{children}</main>
-                <footer>
-                  © {new Date().getFullYear()}, Yay.tips
-                </footer>
-              </Box>
+              <Box align='center' pad={{
+              }}>
+                <Box
+                  width={'large'}
+                  pad={{
+                    horizontal: 'large',
+                    vertical: 'medium',
+                  }}
+                  alignSelf='center'
+                >
+                  <main>{children}</main>
+                  <footer>
+                    © {new Date().getFullYear()}, Yay.tips
+                  </footer>
+                </Box>
               </Box>
           </Grommet>
         </PathProvider>
