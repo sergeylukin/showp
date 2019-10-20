@@ -10,7 +10,9 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import { IntlProvider } from 'react-intl'
 import Headroom from 'react-headroom'
-import { Box, Grommet } from 'grommet';
+import { Box, Grommet } from 'grommet'
+import { generate as generateTheme } from 'grommet/themes'
+import { deepMerge } from 'grommet/utils'
 
 import Header from "./header"
 import "./layout.css"
@@ -31,25 +33,30 @@ const {
   Provider: PathProvider
 } = PathContext
 
-
-const theme = {
+const baseSpacing = 24
+const baseTheme = generateTheme(baseSpacing)
+const theme = deepMerge(baseTheme, {
   global: {
     colors: {
-      'bg': '#ffffff',
-      'primary': '#18a086',
-      'secondary': '#0F6454',
-      'third': '#D11A3F',
+      // brand: '#18a086',
+      brand: '#67d99c',
+      'accent-1': '#f55f44',
+      'accent-2': '#814e4d',
+      'accent-3': '#4d8af0',
+      'accent-4': '#FFCA58',
     },
     edgeSize: {
-      small: '14px',
+      medium: baseTheme.global.edgeSize.small,
+      large: baseTheme.global.edgeSize.medium,
+      xlarge: baseTheme.global.edgeSize.large,
     },
-    elevation: {
-      light: {
-        minimal: '0 1px 2px 0 rgba(31,45,61,.15)',
-      },
+    size: {
+      medium: baseTheme.global.size.small,
+      large: baseTheme.global.size.medium,
+      xlarge: baseTheme.global.size.large,
     },
   },
-};
+})
 
 const Layout = ({ pageContext: {locale, localessPath},  children }) => {
   const data = useStaticQuery(graphql`
@@ -66,18 +73,18 @@ const Layout = ({ pageContext: {locale, localessPath},  children }) => {
     <IntlProvider locale={locale}  messages={messages[locale]}>
       <LocaleProvider value={{currentLocale: locale}}>
         <PathProvider value={{localessPath}}>
-          <Grommet theme={theme}>
+          <Grommet theme={theme} full>
               <Headroom
                 upTolerance={10}
                 downTolerance={10}
-                style={{zIndex: '20', height: '60px'}}
+                style={{zIndex: '20', height: '75px'}}
               >
                 <Header siteTitle={data.site.siteMetadata.title} />
               </Headroom>
               <Box align='center' pad={{
               }}>
                 <Box
-                  width={'large'}
+                  width={'xlarge'}
                   pad={{
                     horizontal: 'large',
                     vertical: 'medium',
