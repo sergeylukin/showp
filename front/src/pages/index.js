@@ -16,7 +16,8 @@ const IndexPage = ({ pageContext, data }) => {
           const columns = {
             small: '',
             medium: ['1/2', '1/2'],
-            large: { count: 'fill', size: 'small' },
+            large: ['1/2', '1/2'],
+            // large: { count: 'fill', size: 'small' },
           }
           return (
             <Box pad={{ vertical: 'large' }}>
@@ -30,7 +31,7 @@ const IndexPage = ({ pageContext, data }) => {
                 <Grid
                   align="start"
                   columns={columns[size]}
-                  gap="medium"
+                  gap="large"
                 >
                   {data.allStrapiTip.edges.map(doc => {
                     const isTipHasImage = doc.node.hasOwnProperty('image')

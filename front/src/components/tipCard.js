@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import styled, { css } from "styled-components";
 import {
   Box,
+  Layer,
   Button,
+  Paragraph,
   Text,
   ThemeContext
 } from "grommet";
@@ -33,17 +35,16 @@ class TipCard extends Component {
     return (
       <Box background='white' pad={{ horizontal: "small" }} style={{zIndex: 1}}>
           <Link to={`/${tip.slug}`}>
-          <Box 
-            pad={{ vertical: 'small' }}
-          >
-        <Text
-          size="medium"
-          color="dark-2"
-          truncate
-        >
-            {tip.title}
-        </Text>
-          </Box>
+            <Box 
+              pad={{ vertical: 'large' }}
+            >
+              <Text
+                size="large"
+                color="dark-2"
+              >
+                  {tip.title}
+              </Text>
+            </Box>
           </Link>
       </Box>
     );
@@ -83,10 +84,24 @@ class TipCard extends Component {
     const { tip = {}, onClickFavorite, ...rest } = this.props;
     return (
       <Box round="xxsmall" elevation="small" overflow="hidden" {...rest}>
-        <Box height="small">
-          <Link to={`/${tip.slug}`}>
-            {tip.image}
-          </Link>
+        <Box style={{ position: 'relative' }}>
+          <Box>
+            <Link to={`/${tip.slug}`}>
+              {tip.image}
+            </Link>
+          </Box>
+          {/*<Box style={{ position: 'absolute', bottom: '0' }} align='left' margin={{ left: 'large' }} justify='end'>
+            <Paragraph>
+              <Text style={{ 
+                boxShadow: '0 0 0 10px rgba(255, 255, 255, .9)',
+                backgroundColor: 'rgba(255, 255, 255, .9)',
+                boxDecorationBreak: 'clone',
+                lineHeight: 2.5,
+              }} size='large' >
+                {tip.title}
+              </Text>
+            </Paragraph>
+          </Box>*/}
         </Box>
         {this.renderCardHeader()}
 
