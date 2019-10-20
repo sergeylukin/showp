@@ -10,7 +10,7 @@ theme.overrideThemeStyles = ({ rhythm }, options) => ({
   },
   'a:hover': {
     color: '#0F6454',
-  }
+  },
 })
 
 const typography = new Typography(theme)

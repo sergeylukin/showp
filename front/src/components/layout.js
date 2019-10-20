@@ -33,17 +33,18 @@ const {
   Provider: PathProvider
 } = PathContext
 
-const baseSpacing = 24
+const baseSpacing = 23
 const baseTheme = generateTheme(baseSpacing)
 const theme = deepMerge(baseTheme, {
   global: {
     colors: {
       // brand: '#18a086',
       brand: '#67d99c',
-      'accent-1': '#f55f44',
+      'accent-1': '#18a086',
       'accent-2': '#814e4d',
-      'accent-3': '#4d8af0',
+      'accent-3': '#f55f44',
       'accent-4': '#FFCA58',
+      focus: '#67d99c',
     },
     edgeSize: {
       medium: baseTheme.global.edgeSize.small,
@@ -56,6 +57,19 @@ const theme = deepMerge(baseTheme, {
       xlarge: baseTheme.global.size.large,
     },
   },
+  breakpoints: {
+    small: {
+      value: baseSpacing * 32, // 768
+    }
+  },
+  heading: {
+    weight: 400,
+    level: {
+      1: {
+        small: `${baseSpacing - 20}px`,
+      }
+    }
+  }
 })
 
 const Layout = ({ pageContext: {locale, localessPath},  children }) => {
@@ -77,7 +91,7 @@ const Layout = ({ pageContext: {locale, localessPath},  children }) => {
               <Headroom
                 upTolerance={10}
                 downTolerance={10}
-                style={{zIndex: '20', height: '75px'}}
+                style={{zIndex: '20', height: '60px'}}
               >
                 <Header siteTitle={data.site.siteMetadata.title} />
               </Headroom>
@@ -85,11 +99,7 @@ const Layout = ({ pageContext: {locale, localessPath},  children }) => {
               }}>
                 <Box
                   width={'xlarge'}
-                  pad={{
-                    horizontal: 'large',
-                    vertical: 'medium',
-                  }}
-                  alignSelf='center'
+                  pad={{ horizontal: 'large' }}
                 >
                   <main>{children}</main>
                   <footer>
