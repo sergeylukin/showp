@@ -46,6 +46,15 @@ const theme = deepMerge(baseTheme, {
       'accent-4': '#FFCA58',
       focus: '#67d99c',
     },
+    breakpoints: {
+      small: {
+        value: 450
+      },
+      medium: {
+        value: 700
+      },
+      large: 1100
+    },
     edgeSize: {
       medium: baseTheme.global.edgeSize.small,
       large: baseTheme.global.edgeSize.medium,
@@ -56,11 +65,6 @@ const theme = deepMerge(baseTheme, {
       large: baseTheme.global.size.medium,
       xlarge: baseTheme.global.size.large,
     },
-  },
-  breakpoints: {
-    small: {
-      value: baseSpacing * 32, // 768
-    }
   },
   heading: {
     weight: 400,
@@ -97,16 +101,16 @@ const Layout = ({ pageContext: {locale, localessPath},  children }) => {
               </Headroom>
               <Box align='center' pad={{
               }}>
-                <Box
-                  width={'xlarge'}
-                  pad={{ horizontal: 'large' }}
-                >
-                  <main>{children}</main>
-                  <footer>
-                    © {new Date().getFullYear()}, Yay.tips
-                  </footer>
-                </Box>
+              <Box
+                width={'xlarge'}
+                pad={{ horizontal: 'large', bottom: 'large' }}
+              >
+                <main>{children}</main>
+                <footer>
+                  © {new Date().getFullYear()}, Yay.tips
+                </footer>
               </Box>
+            </Box>
           </Grommet>
         </PathProvider>
       </LocaleProvider>

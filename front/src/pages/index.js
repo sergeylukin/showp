@@ -1,56 +1,60 @@
 import React from "react"
 import { graphql } from "gatsby"
-import ReactMarkdown from "react-markdown"
 import { Box, Grid, ResponsiveContext } from 'grommet'
 
 import Layout from "../components/layout"
 import Img from "gatsby-image"
 import SEO from "../components/seo"
-import Link from "../components/localizedLink"
 import Hero from '../components/hero'
+import { TipCard  } from '../components'
 
 const IndexPage = ({ pageContext, data }) => {
   return (
-    <ResponsiveContext.Consumer>
-      {size => (
-        <Layout pageContext={pageContext}>
-          <SEO
-            titleMessageId={'indexPageTitle'}
-            descriptionMessageId={'indexPageDescription'}
-            lang={pageContext.locale}
-          />
-          <Box pad={{ vertical: size === 'small' ? 'none' : 'large' }}>
-            <Hero />
-            <Box pad={{ top: 'xlarge' }}>
-              <Grid
-                align="start"
-                columns={size !== "small" && { count: "fill", size: "medium" }}
-                gap="medium"
-              >
-                {data.allStrapiTip.edges.map(doc => {
-                  const isTipHasImage = doc.node.hasOwnProperty('image')
-                  return (
-                    <Box key={doc.id}>
-                      <h2>
-                        <Link to={`/${doc.node.slug}`}>
-                          {doc.node.title}
-                        </Link>
-                      </h2>
-                      {isTipHasImage && <Img fixed={doc.node.image.childImageSharp.fixed} />}
-                      <ReactMarkdown
-                        source={doc.node.content.substring(0, 500).concat("...")}
-                        transformImageUri={uri => uri.startsWith('http') ? uri : `${process.env.IMAGE_BASE_URL}${uri}`}
-                        className={ "indexTip" }
-                        escapeHtml={false}
+    <Layout pageContext={pageContext}>
+      <ResponsiveContext.Consumer>
+        {size => {
+          const columns = {
+            small: '',
+            medium: ['1/2', '1/2'],
+            large: { count: 'fill', size: 'small' },
+          }
+          return (
+            <Box pad={{ vertical: 'large' }}>
+              <SEO
+                titleMessageId={'indexPageTitle'}
+                descriptionMessageId={'indexPageDescription'}
+                lang={pageContext.locale}
+              />
+              <Hero />
+              <Box pad={{ top: 'xlarge' }}>
+                <Grid
+                  align="start"
+                  columns={columns[size]}
+                  gap="medium"
+                >
+                  {data.allStrapiTip.edges.map(doc => {
+                    const isTipHasImage = doc.node.hasOwnProperty('image')
+                    let image = <div />
+                    if (isTipHasImage) {
+                      image = <Img
+                        fluid={doc.node.image.childImageSharp.fluid}
                       />
-                    </Box>
-                  )
-                })}
-              </Grid>
+                    }
+                    return (
+                      <TipCard key={doc.id} tip={{
+                          title: doc.node.title,
+                          image,
+                          slug: doc.node.slug,
+                        }}
+                      />
+                    )
+                  })}
+                </Grid>
+              </Box>
             </Box>
-          </Box>
-        </Layout>)}
+          )}}
       </ResponsiveContext.Consumer>
+    </Layout>
   )
 }
 
@@ -71,8 +75,8 @@ export const pageQuery = graphql`
           }
           image {
             childImageSharp {
-              fixed(width: 200, height: 125) {
-                ...GatsbyImageSharpFixed
+              fluid(maxWidth: 370, maxHeight: 370, cropFocus: CENTER) {
+                ...GatsbyImageSharpFluid
               }
             }
           }
