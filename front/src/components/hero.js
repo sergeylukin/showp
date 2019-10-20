@@ -17,7 +17,7 @@ export default (props) => {
       {size => (
         <Box flex align='center' direction={size === 'small' ? 'column' : 'row'}>
           <Box flex fill width={{
-            min: size !== 'small' ? '70%' : '100%',
+            min: size === 'small' ? '100%' : '70%',
           }} pad='none'>
             <Heading
               level={1}
