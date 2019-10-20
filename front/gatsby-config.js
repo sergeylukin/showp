@@ -10,7 +10,6 @@ const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
 module.exports = {
   siteMetadata: {
     title: `Yay.tips`,
-    description: `Tips and lifehacks for everyday and everyone`,
     author: `@yaytips`,
     siteUrl
   },
@@ -67,7 +66,6 @@ module.exports = {
         background_color: `#ffffff`,
         theme_color: `#ffffff`,
         display: `standalone`,
-        orientation: 'portrait',
         icon: `src/images/yaytips-icon.png`, // This path is relative to the root of the site.
       },
     },

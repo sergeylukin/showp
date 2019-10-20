@@ -9,15 +9,15 @@ import React from "react"
 import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
+import { useIntl } from 'react-intl'
 
-function SEO({ description, lang, meta, title }) {
+function SEO({ description, lang, meta, title, titleMessageId, descriptionMessageId }) {
   const { site } = useStaticQuery(
     graphql`
       query {
         site {
           siteMetadata {
             title
-            description
             author
           }
         }
@@ -25,7 +25,19 @@ function SEO({ description, lang, meta, title }) {
     `
   )
 
-  const metaDescription = description || site.siteMetadata.description
+  let metaDescription = description
+  // if (!metaDescription && site.siteMetadata.hasOwnProperty('description')) {
+  //   metaDescription = site.siteMetadata.description
+  // }
+
+  const t = useIntl()
+
+  if (titleMessageId) {
+    title = t.formatMessage({id: titleMessageId}, title)
+  }
+  if (descriptionMessageId) {
+    metaDescription = t.formatMessage({id: descriptionMessageId}, metaDescription)
+  }
 
   return (
     <Helmet
@@ -83,6 +95,8 @@ SEO.propTypes = {
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
+  titleMessageId: PropTypes.string,
+  descriptionMessageId: PropTypes.string,
 }
 
 export default SEO

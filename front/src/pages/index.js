@@ -14,7 +14,11 @@ const IndexPage = ({ pageContext, data }) => {
     <ResponsiveContext.Consumer>
       {size => (
         <Layout pageContext={pageContext}>
-          <SEO title={'Hello'} lang={pageContext.locale} />
+          <SEO
+            titleMessageId={'indexPageTitle'}
+            descriptionMessageId={'indexPageDescription'}
+            lang={pageContext.locale}
+          />
           <Box pad={{ vertical: size === 'small' ? 'none' : 'large' }}>
             <Hero />
             <Box pad={{ top: 'xlarge' }}>
