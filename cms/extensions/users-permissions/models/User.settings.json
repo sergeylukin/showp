@@ -1,6 +1,6 @@
 {
-  "collectionName": "users-permissions_user",
   "connection": "default",
+  "collectionName": "users-permissions_user",
   "info": {
     "name": "user",
     "description": ""
@@ -59,6 +59,10 @@
     "tips": {
       "collection": "tip",
       "via": "author"
+    },
+    "Fullname": {
+      "maxLength": 40,
+      "type": "string"
     }
   }
 }

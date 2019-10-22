@@ -25,11 +25,6 @@
       "via": "related",
       "plugin": "upload"
     },
-    "author": {
-      "model": "user",
-      "via": "tips",
-      "plugin": "users-permissions"
-    },
     "content": {
       "minLength": 10,
       "required": true,
@@ -45,6 +40,11 @@
     "description": {
       "maxLength": 160,
       "type": "text"
+    },
+    "author": {
+      "model": "user",
+      "via": "tips",
+      "plugin": "users-permissions"
     }
   }
 }
