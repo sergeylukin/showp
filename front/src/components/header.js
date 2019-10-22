@@ -11,7 +11,7 @@ import useLocale from "../hooks/useLocale"
 
 import logo from "../images/logo.png"
 
-const Header = ({ siteTitle }) => {
+const Header = ({ pageType, siteTitle }) => {
   const { localessPath } = usePath()
   const { currentLocale } = useLocale()
   let localeSelectorItems = []
@@ -21,7 +21,13 @@ const Header = ({ siteTitle }) => {
     const item = locales[locale]
     const isCurrentLocale = locale === currentLocale
     const ISO_639_1 = item.path
-    const path = item.default ? localessPath : `/${ISO_639_1}${localessPath}`
+    let path = item.default ? localessPath : `/${ISO_639_1}${localessPath}`
+
+    // If page is Tip - then just redirect to homepage of selected language
+    // we currently don't support switching between translated posts
+    if (pageType === 'tip') {
+      path = `/${ISO_639_1}`
+    }
     if (isCurrentLocale) {
       localeSelectorTitle = item.title
     } else {

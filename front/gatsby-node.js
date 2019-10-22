@@ -59,7 +59,8 @@ exports.createPages = ({ actions, graphql }) => {
           context: {
             id: node.id,
             locale,
-            localessPath: url
+            localessPath: url,
+            pageType: 'tip'
           },
         });
       })
@@ -93,7 +94,8 @@ exports.createPages = ({ actions, graphql }) => {
             id: node.id,
             id_integer: parseInt(node.id.replace("User_", '')),
             locale,
-            localessPath: url
+            localessPath: url,
+            pageType: 'author'
           },
         }
 
@@ -125,7 +127,8 @@ exports.onCreatePage = ({ page, actions }) => {
         path: localizedPath,
         context: {
           locale,
-          localessPath: page.path
+          localessPath: page.path,
+          pageType: 'common'
         }
       })
     })

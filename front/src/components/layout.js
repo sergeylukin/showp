@@ -76,7 +76,7 @@ const theme = deepMerge(baseTheme, {
   }
 })
 
-const Layout = ({ pageContext: {locale, localessPath},  children }) => {
+const Layout = ({ pageContext: {pageType, locale, localessPath},  children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -97,7 +97,7 @@ const Layout = ({ pageContext: {locale, localessPath},  children }) => {
                 downTolerance={10}
                 style={{zIndex: '20', height: '60px'}}
               >
-                <Header siteTitle={data.site.siteMetadata.title} />
+                <Header pageType={pageType} siteTitle={data.site.siteMetadata.title} />
               </Headroom>
               <Box align='center' pad={{
               }}>
