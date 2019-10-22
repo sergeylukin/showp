@@ -10,7 +10,18 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import { IntlProvider } from 'react-intl'
 import Headroom from 'react-headroom'
-import { Box, Grommet } from 'grommet'
+import { FormattedMessage } from 'react-intl'
+import {
+  Facebook,
+  Twitter,
+  Slack
+} from 'grommet-icons'
+import {
+  Box,
+  Grommet,
+  Button,
+  Paragraph
+} from 'grommet'
 import { generate as generateTheme } from 'grommet/themes'
 import { deepMerge } from 'grommet/utils'
 
@@ -87,6 +98,13 @@ const Layout = ({ pageContext: {pageType, locale, localessPath},  children }) =>
     }
   `)
 
+  let twitterUrl = 'https://twitter.com/@yay_tips'
+  let facebookUrl = 'https://fb.me/yaytips'
+  if (locale === 'ru-RU') {
+    twitterUrl = 'https://twitter.com/@yay_tips_ru'
+    facebookUrl = 'https://fb.me/yaytipsRussian'
+  }
+
   return (
     <IntlProvider locale={locale}  messages={messages[locale]}>
       <LocaleProvider value={{currentLocale: locale}}>
@@ -103,12 +121,18 @@ const Layout = ({ pageContext: {pageType, locale, localessPath},  children }) =>
               }}>
               <Box
                 width={'xlarge'}
-                pad={{ horizontal: 'large', bottom: 'large' }}
+                pad={{ horizontal: 'large' }}
               >
                 <main>{children}</main>
-                <footer>
-                  © {new Date().getFullYear()}, Yay.tips
-                </footer>
+                <Box as='footer' align='center'>
+                  <Box direction='row' align='center'>
+                    <FormattedMessage id='FindUsOn' defaultMessage='Find us on:' />
+                    <Button icon={<Facebook />} hoverIndicator href={facebookUrl} target="_blank" />
+                    <Button icon={<Twitter />} hoverIndicator href={twitterUrl} target="_blank" />
+                    <Button icon={<Slack />} hoverIndicator href="https://yaytips.slack.com" target="_blank" />
+                  </Box>
+                  <Paragraph margin='auto 0'>© {new Date().getFullYear()}, Yay.tips</Paragraph>
+                </Box>
               </Box>
             </Box>
           </Grommet>
