@@ -50,6 +50,10 @@ function SEO({ description, type, path, image, lang, meta, title, titleMessageId
   
   let metaTags = [
     {
+      name: `google`,
+      content: `notranslate`
+    },
+    {
       name: `description`,
       content: metaDescription,
     },
