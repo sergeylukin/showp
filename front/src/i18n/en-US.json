@@ -3,5 +3,7 @@
   "indexPageTitle": "Skills and lifehacks for everyday",
   "indexPageDescription": "Daily updated collection of handpicked skills and easy to learn lifehacks for home, cooking, shopping, personal finance, etc.",
   "NotFoundPageTitle": "404: Not found",
-  "NotFoundPageDescription": "You just hit a route that doesnt exist... the sadness."
+  "NotFoundPageDescription": "You just hit a route that doesnt exist... the sadness.",
+  "Share": "Share",
+  "WrittenBy": "By {author}"
 }

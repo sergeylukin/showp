@@ -10,7 +10,14 @@ const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
 module.exports = {
   siteMetadata: {
     title: `Yay.tips`,
-    author: `@yaytips`,
+    author: {
+      'ru-RU': {
+        twitter: `@yay_tips_ru`,
+      },
+      'en-US': {
+        twitter: `@yay_tips`,
+      },
+    },
     siteUrl
   },
   plugins: [
