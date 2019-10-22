@@ -5,5 +5,7 @@
   "NotFoundPageTitle": "404: Страница не найдена",
   "NotFoundPageDescription": "Вы попали на несуществующую страницу. Возможно, она еще не готова или была удалена.",
   "Share": "Поделиться",
-  "WrittenBy": "Автор: {author}"
+  "WrittenBy": "Автор: {author}",
+  "authorPageTitle": "{fullname}, пользователь Yay.tips",
+  "findUsOnSocial": "Наши каналы"
 }

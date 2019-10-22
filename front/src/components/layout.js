@@ -126,7 +126,7 @@ const Layout = ({ pageContext: {pageType, locale, localessPath},  children }) =>
                 <main>{children}</main>
                 <Box as='footer' align='center'>
                   <Box direction='row' align='center'>
-                    <FormattedMessage id='FindUsOn' defaultMessage='Find us on:' />
+                    <FormattedMessage id='findUsOnSocial' defaultMessage='Find us on' />:
                     <Button icon={<Facebook />} hoverIndicator href={facebookUrl} target="_blank" rel="noreferrer noopener" />
                     <Button icon={<Twitter />} hoverIndicator href={twitterUrl} target="_blank" rel="noreferrer noopener" />
                     <Button icon={<Slack />} hoverIndicator href="https://yaytips.slack.com" target="_blank" rel="noreferrer" />

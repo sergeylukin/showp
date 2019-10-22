@@ -5,5 +5,7 @@
   "NotFoundPageTitle": "404: Not found",
   "NotFoundPageDescription": "You just hit a route that doesnt exist... the sadness.",
   "Share": "Share",
-  "WrittenBy": "By {author}"
+  "WrittenBy": "By {author}",
+  "authorPageTitle": "{fullname}, Author at Yay.tips",
+  "findUsOnSocial": "Find us on"
 }

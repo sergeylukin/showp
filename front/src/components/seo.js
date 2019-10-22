@@ -11,7 +11,7 @@ import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 import { useIntl } from 'react-intl'
 
-function SEO({ description, path, image, lang, meta, title, titleMessageId, descriptionMessageId }) {
+function SEO({ description, type, path, image, lang, meta, title, titleMessageId, titleMessageValues, descriptionMessageId }) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -34,7 +34,7 @@ function SEO({ description, path, image, lang, meta, title, titleMessageId, desc
   const t = useIntl()
 
   if (titleMessageId) {
-    title = t.formatMessage({id: titleMessageId}, title)
+    title = t.formatMessage({id: titleMessageId, defaultMessage: title}, titleMessageValues)
   }
   if (descriptionMessageId) {
     metaDescription = t.formatMessage({id: descriptionMessageId}, metaDescription)
@@ -55,12 +55,16 @@ function SEO({ description, path, image, lang, meta, title, titleMessageId, desc
       content: title,
     },
     {
+      property: `og:locale`,
+      content: lang.replace('-', '_'),
+    },
+    {
       property: `og:description`,
       content: metaDescription,
     },
     {
       property: `og:type`,
-      content: `website`,
+      content: type,
     },
     {
       property: `og:url`,
@@ -68,7 +72,7 @@ function SEO({ description, path, image, lang, meta, title, titleMessageId, desc
     },
     {
       name: `twitter:card`,
-      content: `summary`,
+      content: image ? `summary_large_image` : `summary`,
     },
     {
       name: `twitter:creator`,

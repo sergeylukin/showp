@@ -12,8 +12,11 @@ const UserTemplate = ({ pageContext, data, path }) => {
     <Layout  pageContext={pageContext}>
       <SEO
         title={`Author page of ${data.strapiUser.username}`}
+        titleMessageId={'authorPageTitle'}
+        titleMessageValues={{fullname: data.strapiUser.Fullname}}
         lang={pageContext.locale}
         path={path}
+        type='object'
       />
       <h1>{data.strapiUser.username}</h1>
       <ul>
@@ -36,6 +39,7 @@ export const query = graphql`
     strapiUser(id: {eq: $id}) {
       id
       username
+      Fullname
     }
     allStrapiTip(filter: {
       author: {id: {eq: $id_integer}},
