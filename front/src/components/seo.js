@@ -11,7 +11,7 @@ import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 import { useIntl } from 'react-intl'
 
-function SEO({ description, lang, meta, title, titleMessageId, descriptionMessageId }) {
+function SEO({ description, path, image, lang, meta, title, titleMessageId, descriptionMessageId }) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -19,6 +19,7 @@ function SEO({ description, lang, meta, title, titleMessageId, descriptionMessag
           siteMetadata {
             title
             author
+            siteUrl
           }
         }
       }
@@ -43,6 +44,60 @@ function SEO({ description, lang, meta, title, titleMessageId, descriptionMessag
   if (lang === 'ru-RU') {
     twitterAuthor = '@yay_tips_ru'
   }
+  
+  let metaTags = [
+    {
+      name: `description`,
+      content: metaDescription,
+    },
+    {
+      property: `og:title`,
+      content: title,
+    },
+    {
+      property: `og:description`,
+      content: metaDescription,
+    },
+    {
+      property: `og:type`,
+      content: `website`,
+    },
+    {
+      property: `og:url`,
+      content: site.siteMetadata.siteUrl + path,
+    },
+    {
+      name: `twitter:card`,
+      content: `summary`,
+    },
+    {
+      name: `twitter:creator`,
+      content: twitterAuthor,
+    },
+    {
+      name: `twitter:title`,
+      content: title,
+    },
+    {
+      name: `twitter:description`,
+      content: metaDescription,
+    },
+    {
+      property: `twitter:site`,
+      content: twitterAuthor,
+    },
+  ].concat(meta)
+
+  if (image) {
+    metaTags.push({
+      property: `og:image`,
+      content: image,
+    })
+    metaTags.push({
+      property: `twitter:image`,
+      content: image,
+    })
+  }
 
   return (
     <Helmet
@@ -51,40 +106,7 @@ function SEO({ description, lang, meta, title, titleMessageId, descriptionMessag
       }}
       title={title}
       titleTemplate={`%s | ${site.siteMetadata.title}`}
-      meta={[
-        {
-          name: `description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:title`,
-          content: title,
-        },
-        {
-          property: `og:description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:type`,
-          content: `website`,
-        },
-        {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: twitterAuthor,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
-      ].concat(meta)}
+      meta={metaTags}
     />
   )
 }

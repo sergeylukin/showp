@@ -7,10 +7,14 @@ import "../styles/global.css"
 import Link from "../components/localizedLink"
 import SEO from "../components/seo"
 
-const UserTemplate = ({ pageContext, data }) => {
+const UserTemplate = ({ pageContext, data, path }) => {
   return (
     <Layout  pageContext={pageContext}>
-      <SEO title={`Author page of ${data.strapiUser.username}`} lang={pageContext.locale} />
+      <SEO
+        title={`Author page of ${data.strapiUser.username}`}
+        lang={pageContext.locale}
+        path={path}
+      />
       <h1>{data.strapiUser.username}</h1>
       <ul>
         {data.allStrapiTip.edges.map(({node}) => (

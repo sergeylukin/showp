@@ -25,6 +25,7 @@ const IndexPage = ({ pageContext, data }) => {
                 titleMessageId={'indexPageTitle'}
                 descriptionMessageId={'indexPageDescription'}
                 lang={pageContext.locale}
+                type='website'
               />
               <Hero />
               <Box pad={{ top: 'xlarge' }}>

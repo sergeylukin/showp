@@ -18,7 +18,13 @@ const TipTemplate = (props) => {
   return (
     <Layout pageContext={pageContext}>
       <Box pad={{ top: 'large' }}>
-        <SEO title={`${data.strapiTip.title}`} description={`${data.strapiTip.description}`} lang={pageContext.locale} />
+        <SEO title={`${data.strapiTip.title}`}
+          description={`${data.strapiTip.description}`}
+          lang={pageContext.locale}
+          path={path}
+          image={data.strapiTip.image.childImageSharp.fluid.src}
+          type='article'
+        />
         <Heading mlevel={1} margin={{ vertical: 'none' }}>{data.strapiTip.title}</Heading>
         <Box direction='row' justify='between' align='center'>
           <Paragraph margin={'auto 0'}>
