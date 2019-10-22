@@ -39,7 +39,8 @@
     },
     "description": {
       "maxLength": 160,
-      "type": "text"
+      "type": "text",
+      "required": true
     },
     "author": {
       "model": "user",
