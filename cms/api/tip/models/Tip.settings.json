@@ -45,6 +45,9 @@
       "model": "user",
       "via": "tips",
       "plugin": "users-permissions"
+    },
+    "tip": {
+      "model": "tip"
     }
   }
 }

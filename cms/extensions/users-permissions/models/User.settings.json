@@ -56,14 +56,14 @@
       "plugin": "users-permissions",
       "configurable": false
     },
-    "tips": {
-      "collection": "tip",
-      "via": "author"
-    },
     "Fullname": {
       "maxLength": 40,
       "type": "string",
       "required": true
+    },
+    "tips": {
+      "collection": "tip",
+      "via": "author"
     }
   }
 }
