@@ -1,5 +1,5 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { graphql } from "gatsby"
 import Img from 'gatsby-image'
 import ReactMarkdown from 'react-markdown'
 import { Paragraph, Box, Heading } from 'grommet'
@@ -13,7 +13,7 @@ import Share from "../components/share"
 const TipTemplate = (props) => {
   const { pageContext, data, path } = props
   const isTipHasImage = data.strapiTip.hasOwnProperty('image')
-  console.log(props)
+
 
   return (
     <Layout pageContext={pageContext}>

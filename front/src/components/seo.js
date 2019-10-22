@@ -44,6 +44,8 @@ function SEO({ description, type, path, image, lang, meta, title, titleMessageId
   if (lang === 'ru-RU') {
     twitterAuthor = '@yay_tips_ru'
   }
+
+  const siteUrl = site.siteMetadata.siteUrl
   
   let metaTags = [
     {
@@ -68,7 +70,7 @@ function SEO({ description, type, path, image, lang, meta, title, titleMessageId
     },
     {
       property: `og:url`,
-      content: site.siteMetadata.siteUrl + path,
+      content: siteUrl + path,
     },
     {
       name: `twitter:card`,
@@ -95,11 +97,11 @@ function SEO({ description, type, path, image, lang, meta, title, titleMessageId
   if (image) {
     metaTags.push({
       property: `og:image`,
-      content: image,
+      content: siteUrl + image,
     })
     metaTags.push({
       property: `twitter:image`,
-      content: image,
+      content: siteUrl + image,
     })
   }
 
