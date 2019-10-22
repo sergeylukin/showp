@@ -68,7 +68,7 @@ export const pageQuery = graphql`
   query IndexQuery($locale: String) {
     allStrapiTip(filter:{
       locale:{code: {eq: $locale}}
-    }, sort: {order: DESC, fields: id}) {
+    }, sort: {order: DESC, fields: created_at}) {
       edges {
         node {
           id
