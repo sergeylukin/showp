@@ -18,7 +18,7 @@ const UserTemplate = ({ pageContext, data, path }) => {
         path={path}
         type='object'
       />
-      <h1>{data.strapiUser.username}</h1>
+      <h1>{data.strapiUser.Fullname}</h1>
       <ul>
         {data.allStrapiTip.edges.map(({node}) => (
           <li key={node.id}>
