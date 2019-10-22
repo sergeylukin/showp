@@ -8,6 +8,9 @@ theme.overrideThemeStyles = ({ rhythm }, options) => ({
   a: {
     color: '#0a735e',
   },
+  'h1 a': {
+    color: '#46bf9f',
+  },
   'a:hover': {
     color: '#18a086',
   },
