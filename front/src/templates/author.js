@@ -7,7 +7,7 @@ import "../styles/global.css"
 import Link from "../components/localizedLink"
 import SEO from "../components/seo"
 
-const UserTemplate = ({ pageContext, data, path }) => {
+const UserTemplate = ({ pageContext, data }) => {
   return (
     <Layout  pageContext={pageContext}>
       <SEO
@@ -15,7 +15,7 @@ const UserTemplate = ({ pageContext, data, path }) => {
         titleMessageId={'authorPageTitle'}
         titleMessageValues={{fullname: data.strapiUser.Fullname}}
         lang={pageContext.locale}
-        path={path}
+        path={pageContext.pageUri}
         type='object'
       />
       <h1>{data.strapiUser.Fullname}</h1>

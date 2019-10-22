@@ -11,8 +11,10 @@ import SEO from "../components/seo"
 import Share from "../components/share"
 
 const TipTemplate = (props) => {
-  const { pageContext, data, uri } = props
+  const { pageContext, data } = props
   const isTipHasImage = data.strapiTip.hasOwnProperty('image')
+
+  const uri = pageContext.pageUri
 
   return (
     <Layout pageContext={pageContext}>

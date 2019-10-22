@@ -8,7 +8,7 @@ import SEO from "../components/seo"
 import Hero from '../components/hero'
 import { TipCard  } from '../components'
 
-const IndexPage = ({ pageContext, data, path }) => {
+const IndexPage = ({ pageContext, data }) => {
   return (
     <Layout pageContext={pageContext}>
       <ResponsiveContext.Consumer>
@@ -26,7 +26,7 @@ const IndexPage = ({ pageContext, data, path }) => {
                 descriptionMessageId={'indexPageDescription'}
                 lang={pageContext.locale}
                 type='website'
-                path={path}
+                path={pageContext.pageUri}
               />
               <Hero />
               <Box pad={{ top: 'xlarge' }}>
