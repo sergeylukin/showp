@@ -11,9 +11,8 @@ import SEO from "../components/seo"
 import Share from "../components/share"
 
 const TipTemplate = (props) => {
-  const { pageContext, data, path } = props
+  const { pageContext, data, uri } = props
   const isTipHasImage = data.strapiTip.hasOwnProperty('image')
-
 
   return (
     <Layout pageContext={pageContext}>
@@ -21,7 +20,7 @@ const TipTemplate = (props) => {
         <SEO title={`${data.strapiTip.title}`}
           description={`${data.strapiTip.description}`}
           lang={pageContext.locale}
-          path={path}
+          path={uri}
           image={data.strapiTip.image.childImageSharp.fluid.src}
           type='article'
         />
@@ -35,7 +34,7 @@ const TipTemplate = (props) => {
               }}
             />
           </Paragraph>
-          <Share title={data.strapiTip.title} path={path} locale={pageContext.locale} />
+          <Share title={data.strapiTip.title} path={uri} locale={pageContext.locale} />
         </Box>
         {isTipHasImage && <Img alt={data.strapiTip.title} fluid={data.strapiTip.image.childImageSharp.fluid}/>}
         <Box pad={{ top: 'large' }}>
