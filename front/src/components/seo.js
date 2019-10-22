@@ -10,6 +10,7 @@ import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 import { useIntl } from 'react-intl'
+import logo from "../images/logo.png"
 
 function SEO({ description, type, path, image, lang, meta, title, titleMessageId, titleMessageValues, descriptionMessageId }) {
   const { site } = useStaticQuery(
@@ -94,6 +95,10 @@ function SEO({ description, type, path, image, lang, meta, title, titleMessageId
     },
   ].concat(meta)
 
+
+  if (path === '/') {
+    image = logo
+  }
   if (image) {
     metaTags.push({
       property: `og:image`,
