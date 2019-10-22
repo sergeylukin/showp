@@ -25,7 +25,7 @@ const TipTemplate = (props) => {
             <FormattedMessage
               id='WrittenBy'
               values={{
-                author: <Link to={`/@${data.strapiTip.author.username}`}>@{data.strapiTip.author.username}</Link>
+                author: <Link to={`/${data.strapiTip.author.username}`}>@{data.strapiTip.author.username}</Link>
               }}
             />
           </Paragraph>

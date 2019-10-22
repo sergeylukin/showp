@@ -1,4 +1,5 @@
 https://agitated-lewin-e41f86.netlify.com https://yay.tips/ 301!
 https://agitated-lewin-e41f86.netlify.com/ https://yay.tips/ 301!
 https://agitated-lewin-e41f86.netlify.com/* https://yay.tips/:splat 301!
-/foo /bar 301!
+/@sergey /sergey 301!
+/@lina /lina 301!
