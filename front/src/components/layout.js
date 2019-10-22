@@ -127,8 +127,8 @@ const Layout = ({ pageContext: {pageType, locale, localessPath},  children }) =>
                 <Box as='footer' align='center'>
                   <Box direction='row' align='center'>
                     <FormattedMessage id='FindUsOn' defaultMessage='Find us on:' />
-                    <Button icon={<Facebook />} hoverIndicator href={facebookUrl} target="_blank" rel="noreferrer" />
-                    <Button icon={<Twitter />} hoverIndicator href={twitterUrl} target="_blank" rel="noreferrer" />
+                    <Button icon={<Facebook />} hoverIndicator href={facebookUrl} target="_blank" rel="noreferrer noopener" />
+                    <Button icon={<Twitter />} hoverIndicator href={twitterUrl} target="_blank" rel="noreferrer noopener" />
                     <Button icon={<Slack />} hoverIndicator href="https://yaytips.slack.com" target="_blank" rel="noreferrer" />
                   </Box>
                   <Paragraph margin='auto 0'>© {new Date().getFullYear()}, Yay.tips</Paragraph>
