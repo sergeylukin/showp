@@ -31,7 +31,7 @@ const TipTemplate = (props) => {
           </Paragraph>
           <Share title={data.strapiTip.title} path={path} locale={pageContext.locale} />
         </Box>
-        {isTipHasImage && <Img fluid={data.strapiTip.image.childImageSharp.fluid}/>}
+        {isTipHasImage && <Img alt={data.strapiTip.title} fluid={data.strapiTip.image.childImageSharp.fluid}/>}
         <Box pad={{ top: 'large' }}>
           <ReactMarkdown
             source={data.strapiTip.content}

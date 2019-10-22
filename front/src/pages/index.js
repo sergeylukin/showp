@@ -38,6 +38,7 @@ const IndexPage = ({ pageContext, data }) => {
                     let image = <div />
                     if (isTipHasImage) {
                       image = <Img
+                        alt={doc.node.title}
                         fluid={doc.node.image.childImageSharp.fluid}
                       />
                     }
