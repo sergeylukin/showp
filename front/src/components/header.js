@@ -26,7 +26,7 @@ const Header = ({ pageType, siteTitle }) => {
     // If page is Tip - then just redirect to homepage of selected language
     // we currently don't support switching between translated posts
     if (pageType === 'tip') {
-      path = `/${ISO_639_1}`
+      path = item.default ? `/` : `/${ISO_639_1}`
     }
     if (isCurrentLocale) {
       localeSelectorTitle = item.title
