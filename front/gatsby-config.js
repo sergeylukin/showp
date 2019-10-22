@@ -45,6 +45,12 @@ module.exports = {
         showSpinner: true,
       },
     },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "UA-150662103-1",
+      },
+    },
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-netlify`,
     {
