@@ -49,6 +49,9 @@
     },
     "tip": {
       "model": "tip"
+    },
+    "publish_at": {
+      "type": "date"
     }
   }
 }
