@@ -62,7 +62,8 @@
     },
     "Fullname": {
       "maxLength": 40,
-      "type": "string"
+      "type": "string",
+      "required": true
     }
   }
 }
