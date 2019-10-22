@@ -131,7 +131,7 @@ const Layout = ({ pageContext: {pageType, locale, localessPath},  children }) =>
                     <Button icon={<Twitter />} hoverIndicator href={twitterUrl} target="_blank" rel="noreferrer noopener" />
                     <Button icon={<Slack />} hoverIndicator href="https://yaytips.slack.com" target="_blank" rel="noreferrer" />
                   </Box>
-                  <Paragraph margin='auto 0'>© {new Date().getFullYear()}, Yay.tips</Paragraph>
+                  <Paragraph>© {new Date().getFullYear()}, Yay.tips</Paragraph>
                 </Box>
               </Box>
             </Box>
