@@ -81,7 +81,7 @@ exports.createPages = ({ actions, graphql }) => {
     // Create pages for each user.
     result.data.allStrapiUser.edges.forEach(({ node }) => {
       Object.keys(locales).map(locale => {
-        const url = `/authors/${node.id}`
+        const url = `/@${node.username}`
         const localizedPath = locales[locale].default
           ? url
           : `/${locales[locale].path}${url}`
