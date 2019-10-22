@@ -39,6 +39,11 @@ function SEO({ description, lang, meta, title, titleMessageId, descriptionMessag
     metaDescription = t.formatMessage({id: descriptionMessageId}, metaDescription)
   }
 
+  let twitterAuthor = '@yay_tips'
+  if (lang === 'ru-RU') {
+    twitterAuthor = '@yay_tips_ru'
+  }
+
   return (
     <Helmet
       htmlAttributes={{
@@ -69,7 +74,7 @@ function SEO({ description, lang, meta, title, titleMessageId, descriptionMessag
         },
         {
           name: `twitter:creator`,
-          content: site.siteMetadata.author,
+          content: twitterAuthor,
         },
         {
           name: `twitter:title`,
