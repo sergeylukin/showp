@@ -41,6 +41,10 @@
     },
     "slug": {
       "type": "string"
+    },
+    "description": {
+      "maxLength": 160,
+      "type": "text"
     }
   }
 }
