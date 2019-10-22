@@ -51,7 +51,7 @@ const theme = deepMerge(baseTheme, {
     colors: {
       // brand: '#18a086',
       brand: '#67d99c',
-      'accent-1': '#18a086',
+      'accent-1': '#0a735e',
       'accent-2': '#814e4d',
       'accent-3': '#f55f44',
       'accent-4': '#FFCA58',

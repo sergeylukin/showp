@@ -6,10 +6,10 @@ theme.headerWeight = 400
 theme.bodyColor = `hsla(0,0%,0%,0.7)`
 theme.overrideThemeStyles = ({ rhythm }, options) => ({
   a: {
-    color: '#18a086',
+    color: '#0a735e',
   },
   'a:hover': {
-    color: '#0F6454',
+    color: '#18a086',
   },
 })
 
