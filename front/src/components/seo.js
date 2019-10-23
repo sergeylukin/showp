@@ -10,7 +10,7 @@ import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 import { useIntl } from 'react-intl'
-import logo from "../images/logo.png"
+import cover_image from "../images/yaytips-cover.png"
 
 function SEO({ description, type, path, image, lang, meta, title, titleMessageId, titleMessageValues, descriptionMessageId }) {
   const { site } = useStaticQuery(
@@ -44,6 +44,10 @@ function SEO({ description, type, path, image, lang, meta, title, titleMessageId
   let twitterAuthor = '@yay_tips'
   if (lang === 'ru-RU') {
     twitterAuthor = '@yay_tips_ru'
+  }
+
+  if (path === '/') {
+    image = cover_image
   }
 
   const siteUrl = site.siteMetadata.siteUrl
@@ -99,10 +103,6 @@ function SEO({ description, type, path, image, lang, meta, title, titleMessageId
     },
   ].concat(meta)
 
-
-  if (path === '/') {
-    image = logo
-  }
   if (image) {
     metaTags.push({
       property: `og:image`,
