@@ -51,14 +51,16 @@
       "model": "tip"
     },
     "publish_datetime": {
-      "type": "date"
+      "type": "date",
+      "required": true
     },
     "isPublished": {
       "enum": [
         "No",
         "Yes"
       ],
-      "type": "enumeration"
+      "type": "enumeration",
+      "required": true
     }
   }
 }
