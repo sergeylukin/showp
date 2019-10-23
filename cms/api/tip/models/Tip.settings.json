@@ -50,8 +50,15 @@
     "tip": {
       "model": "tip"
     },
-    "publish_at": {
+    "publish_datetime": {
       "type": "date"
+    },
+    "isPublished": {
+      "enum": [
+        "No",
+        "Yes"
+      ],
+      "type": "enumeration"
     }
   }
 }

@@ -18,6 +18,14 @@
     },
     {
       "method": "GET",
+      "path": "/tips/publish",
+      "handler": "Tip.publish",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/tips/:id",
       "handler": "Tip.findOne",
       "config": {
