@@ -46,7 +46,7 @@ function SEO({ description, type, path, image, lang, meta, title, titleMessageId
     twitterAuthor = '@yay_tips_ru'
   }
 
-  if (path === '/') {
+  if (type === 'website') {
     image = cover_image
   }
 
