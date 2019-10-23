@@ -30,7 +30,7 @@ exports.createPages = ({ actions, graphql }) => {
 
   const getTips = makeRequest(graphql, `
     {
-      allStrapiTip {
+      allStrapiTip(filter: {isPublished: {eq: "Yes"}}) {
         edges {
           node {
             id
