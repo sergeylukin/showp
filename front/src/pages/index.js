@@ -67,6 +67,7 @@ export default  IndexPage
 export const pageQuery = graphql`
   query IndexQuery($locale: String) {
     allStrapiTip(filter:{
+      isPublished: {eq: "Yes"},
       locale:{code: {eq: $locale}}
     }, sort: {order: DESC, fields: created_at}) {
       edges {

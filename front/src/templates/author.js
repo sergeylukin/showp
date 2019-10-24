@@ -42,6 +42,7 @@ export const query = graphql`
       Fullname
     }
     allStrapiTip(filter: {
+      isPublished: {eq: "Yes"},
       author: {id: {eq: $id_integer}},
       locale: {code: {eq: $locale}
     }}) {
