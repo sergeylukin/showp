@@ -44,8 +44,8 @@ export const query = graphql`
     allStrapiTip(filter: {
       isPublished: {eq: "Yes"},
       author: {id: {eq: $id_integer}},
-      locale: {code: {eq: $locale}
-    }}) {
+      locale: {code: {eq: $locale}}
+    }, sort: {order: DESC, fields: publish_datetime}) {
       edges {
         node {
           id

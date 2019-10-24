@@ -69,7 +69,7 @@ export const pageQuery = graphql`
     allStrapiTip(filter:{
       isPublished: {eq: "Yes"},
       locale:{code: {eq: $locale}}
-    }, sort: {order: DESC, fields: created_at}) {
+    }, sort: {order: DESC, fields: publish_datetime}) {
       edges {
         node {
           id
