@@ -109,7 +109,7 @@ const Layout = ({ pageContext: {pageType, locale, localessPath},  children }) =>
     <IntlProvider locale={locale}  messages={messages[locale]}>
       <LocaleProvider value={{currentLocale: locale}}>
         <PathProvider value={{localessPath}}>
-          <Grommet theme={theme} full>
+          <Grommet theme={theme}>
               <Headroom
                 upTolerance={10}
                 downTolerance={10}
