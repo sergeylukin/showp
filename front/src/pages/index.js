@@ -1,12 +1,12 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { Box, Grid } from 'theme-ui'
+import { Text, Box, Grid, Card } from 'theme-ui'
 
 import Layout from "../components/layout"
 import Img from "gatsby-image"
 import SEO from "../components/seo"
 import Hero from '../components/hero'
-import { TipCard  } from '../components'
+import Link from '../components/localizedLink'
 
 const IndexPage = ({ pageContext, data }) => {
   return (
@@ -19,28 +19,23 @@ const IndexPage = ({ pageContext, data }) => {
         path={pageContext.pageUri}
       />
       <Hero />
-      <Grid>
-        {data.allStrapiTip.edges.map(doc => {
-          const isTipHasImage = doc.node.hasOwnProperty('image')
-          let image = <div />
-            if (isTipHasImage) {
-              image = <Img
-                alt={doc.node.title}
-                fluid={doc.node.image.childImageSharp.fluid}
-              />
-            }
-          return (
-            <Box key={doc.id}>
-              <TipCard
-                tip={{
-                  title: doc.node.title,
-                  image,
-                  slug: doc.node.slug,
-                }}
-              />
-            </Box>
-          )
-        })}
+      <Grid gap={3}
+        columns={[ 2, 3, 4 ]}>
+        {data.allStrapiTip.edges.map(doc => (
+          <Card variant="primary" key={doc.id}>
+            {doc.node.hasOwnProperty('image') && (
+              <Link to={`/${doc.node.slug}`}>
+                <Img
+                  alt={doc.node.title}
+                  fluid={doc.node.image.childImageSharp.fluid}
+                />
+              </Link>
+            )}
+            <Text mt={2} mx={2}>
+              {doc.node.title}
+            </Text>
+          </Card>
+        ))}
       </Grid>
     </Layout>
   )

@@ -103,7 +103,6 @@ export default {
   },
   forms: {
     select: {
-      p: 2,
       mr: 1
     }
   },
@@ -116,8 +115,35 @@ export default {
       }
     },
     secondary: {
-      color: 'background',
-      bg: 'secondary',
+      color: 'primary',
+      padding: 0,
+      bg: 'background',
+      position: 'relative',
+      '::before': {
+        content: '""',
+        display: 'block',
+        position: 'absolute',
+        width: '100%',
+        height: '3px',
+        bottom: '-0px',
+        backgroundColor: 'primary',
+        left: 0
+      }
+    },
+    tag: {
+      color: 'primary',
+      bg: 'background',
+      '&:hover': {
+        bg: 'primary',
+        color: 'background',
+        cursor: 'pointer'
+      },
+      display: 'block',
+      px: 2,
+      py: 1,
+      borderWidth: 1,
+      borderStyle: 'solid',
+      borderRadius: '3px',
     },
   },
   cards: {

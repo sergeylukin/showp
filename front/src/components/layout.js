@@ -6,7 +6,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import { IntlProvider } from 'react-intl'
 import Headroom from 'react-headroom'
 import { FormattedMessage } from 'react-intl'
-import { Text, Box } from 'theme-ui'
+import { Text, Flex, Box } from 'theme-ui'
 
 import Header from "./header"
 import "./layout.css"
@@ -98,27 +98,34 @@ const Layout = ({ pageContext: {pageType, locale, localessPath},  children }) =>
               {children}
             </Container>
           </main>
+          <footer sx={{
+            width: '100%'
+          }}>
           <Container>
-            <footer
+            <Flex
               sx={{
-                display: 'flex',
                 flexWrap: 'wrap',
                 alignItems: 'center',
-                p: 2,
+                py: 4,
                 variant: 'styles.footer',
+                justifyContent: 'space-between',
+                maxWidth: 'container'
               }}>
-              <FormattedMessage id='findUsOnSocial' defaultMessage='Find us on' />:
-              <a href={facebookUrl} target="_blank" rel="noreferrer noopener" sx={{ variant: 'styles.navlink', p: 2 }}>Facebook</a>
-              <a href={twitterUrl} target="_blank" rel="noreferrer noopener" sx={{ variant: 'styles.navlink', p: 2 }}>Twitter</a>
-              <a href="https://yaytips.slack.com" target="_blank" rel="noreferrer" sx={{ variant: 'styles.navlink', p: 2 }}>Slack</a>
+              <Box>
+                <FormattedMessage id='findUsOnSocial' defaultMessage='Find us on' />:
+                <a href={facebookUrl} target="_blank" rel="noreferrer noopener" sx={{ variant: 'styles.navlink', p: 2 }}>Facebook</a>
+                <a href={twitterUrl} target="_blank" rel="noreferrer noopener" sx={{ variant: 'styles.navlink', p: 2 }}>Twitter</a>
+                <a href="https://yaytips.slack.com" target="_blank" rel="noreferrer" sx={{ variant: 'styles.navlink', p: 2 }}>Slack</a>
+              </Box>
               <div sx={{ mx: 'auto' }} />
-              <Text sx={{ p: 2 }}>© {new Date().getFullYear()}, Yay.tips</Text>
-            </footer>
+              <Box><Text>© {new Date().getFullYear()}, Yay.tips</Text></Box>
+            </Flex>
           </Container>
-        </div>
-      </PathProvider>
-    </LocaleProvider>
-  </IntlProvider>
+        </footer>
+      </div>
+    </PathProvider>
+  </LocaleProvider>
+</IntlProvider>
   )
 }
 
