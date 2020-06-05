@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql } from "gatsby"
 import Img from 'gatsby-image'
 import ReactMarkdown from 'react-markdown'
-import { Paragraph, Box, Heading } from 'grommet'
+import { Text, Box, Heading } from 'theme-ui'
 import { FormattedMessage } from 'react-intl'
 
 import Layout from '../components/layout' 
@@ -18,7 +18,7 @@ const TipTemplate = (props) => {
 
   return (
     <Layout pageContext={pageContext}>
-      <Box pad={{ top: 'large' }}>
+      <Box>
         <SEO title={`${data.strapiTip.title}`}
           description={`${data.strapiTip.description}`}
           lang={pageContext.locale}
@@ -26,20 +26,20 @@ const TipTemplate = (props) => {
           image={data.strapiTip.image.childImageSharp.fluid.src}
           type='article'
         />
-        <Heading mlevel={1} margin={{ vertical: 'none' }}>{data.strapiTip.title}</Heading>
-        <Box direction='row' justify='between' align='center'>
-          <Paragraph margin={'auto 0'}>
+        <Heading as='h1'>{data.strapiTip.title}</Heading>
+        <Box>
+          <Text>
             <FormattedMessage
               id='WrittenBy'
               values={{
                 author: <Link to={`/${data.strapiTip.author.username}`}>@{data.strapiTip.author.username}</Link>
               }}
             />
-          </Paragraph>
+          </Text>
           <Share title={data.strapiTip.title} path={uri} locale={pageContext.locale} />
         </Box>
         {isTipHasImage && <Img alt={data.strapiTip.title} fluid={data.strapiTip.image.childImageSharp.fluid}/>}
-        <Box pad={{ top: 'large' }}>
+        <Box>
           <ReactMarkdown
             source={data.strapiTip.content}
             transformImageUri={uri => uri.startsWith('http') ? uri : `${process.env.IMAGE_BASE_URL}${uri}`}

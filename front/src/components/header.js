@@ -1,7 +1,6 @@
 import PropTypes from "prop-types"
 import React from "react"
-import { Box, Menu, Text, ResponsiveContext } from 'grommet';
-import { FormDown } from "grommet-icons";
+import { Box, Select, Text } from 'theme-ui';
 import { navigate } from "gatsby"
 
 import locales from '../constants/locales'
@@ -16,78 +15,61 @@ const Header = ({ pageType, siteTitle }) => {
   const { currentLocale } = useLocale()
   let localeSelectorItems = []
   let localeSelectorTitle
+  let onLocaleChange = (evt) => {
+    Object.keys(locales).forEach(locale => {
+      const selectedLocaleTitle = evt.target.value
+      const item = locales[locale]
+      const isCurrentLocale = locale === currentLocale
+      const ISO_639_1 = item.path
+      let path = item.default ? localessPath : `/${ISO_639_1}${localessPath}`
+
+      // If page is Tip - then just redirect to homepage of selected language
+      // we currently don't support switching between translated posts
+      if (pageType === 'tip') {
+        path = item.default ? `/` : `/${ISO_639_1}`
+      }
+
+      if (selectedLocaleTitle === item.title) {
+        navigate(path)
+      }
+    })
+
+    return null;
+  }
 
   Object.keys(locales).forEach(locale => {
     const item = locales[locale]
     const isCurrentLocale = locale === currentLocale
-    const ISO_639_1 = item.path
-    let path = item.default ? localessPath : `/${ISO_639_1}${localessPath}`
 
-    // If page is Tip - then just redirect to homepage of selected language
-    // we currently don't support switching between translated posts
-    if (pageType === 'tip') {
-      path = item.default ? `/` : `/${ISO_639_1}`
-    }
     if (isCurrentLocale) {
       localeSelectorTitle = item.title
-    } else {
-      localeSelectorItems.push({
-        label: item.title,
-        onClick: () => {
-          navigate(path)
-        }
-      })
     }
+
+    localeSelectorItems.push(<option key={item.title}>{item.title}</option>)
   })
 
   return (
-    <ResponsiveContext.Consumer>
-    {size => (
-      <header>
-        <Box
-          tag='header'
-          direction='row'
-          align='center'
-          justify='center'
-          background='white'
-          pad={{
-            vertical: size === 'small' ? 'medium' : 'xsmall'
-          }}
-          elevation='xsmall'
-        >
-          <Box
-            direction='row'
-            align='center'
-            width='xlarge'
-            pad={{
-              left: 'large',
-              right: 'medium'
-            }}
-          >
-            <Box flex>
-              <Link to="/" style={{ display: 'flex' }}>
-                <img src={logo} width={100} height={31} alt="Logo" />
-              </Link>
-            </Box>
-            <Box direction='row'>
-              <Menu plain items={localeSelectorItems}>
-                {({ drop, hover }) => {
-                  return (
-                    <Box direction="row" gap="xxsmall" pad='small'>
-                      <Text>{localeSelectorTitle}</Text>
-                      <FormDown />
-                    </Box>
-                  )
-                }}
-              </Menu>
-            </Box>
+    <header>
+      <Box>
+        <Box>
+          <Box>
+            <Link to="/" style={{ display: 'flex' }}>
+              <img src={logo} width={100} height={31} alt="Logo" />
+            </Link>
+          </Box>
+          <Box>
+            <Select
+              onChange={onLocaleChange}
+              defaultValue={localeSelectorTitle}>
+              {localeSelectorItems}
+            </Select>
           </Box>
         </Box>
-      </header>
-    )}
-    </ResponsiveContext.Consumer>
+      </Box>
+    </header>
   )
 }
+
 
 Header.propTypes = {
   siteTitle: PropTypes.string,

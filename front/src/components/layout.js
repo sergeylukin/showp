@@ -11,19 +11,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import { IntlProvider } from 'react-intl'
 import Headroom from 'react-headroom'
 import { FormattedMessage } from 'react-intl'
-import {
-  Facebook,
-  Twitter,
-  Slack
-} from 'grommet-icons'
-import {
-  Box,
-  Grommet,
-  Button,
-  Paragraph
-} from 'grommet'
-import { generate as generateTheme } from 'grommet/themes'
-import { deepMerge } from 'grommet/utils'
+import { Text, Grid, Box } from 'theme-ui'
 
 import Header from "./header"
 import "./layout.css"
@@ -45,47 +33,6 @@ const {
 } = PathContext
 
 const baseSpacing = 23
-const baseTheme = generateTheme(baseSpacing)
-const theme = deepMerge(baseTheme, {
-  global: {
-    colors: {
-      // brand: '#18a086',
-      brand: '#67d99c',
-      'accent-1': '#0a735e',
-      'accent-2': '#814e4d',
-      'accent-3': '#f55f44',
-      'accent-4': '#FFCA58',
-      focus: '#67d99c',
-    },
-    breakpoints: {
-      small: {
-        value: 450
-      },
-      medium: {
-        value: 700
-      },
-      large: 1100
-    },
-    edgeSize: {
-      medium: baseTheme.global.edgeSize.small,
-      large: baseTheme.global.edgeSize.medium,
-      xlarge: baseTheme.global.edgeSize.large,
-    },
-    size: {
-      medium: baseTheme.global.size.small,
-      large: baseTheme.global.size.medium,
-      xlarge: baseTheme.global.size.large,
-    },
-  },
-  heading: {
-    weight: 400,
-    level: {
-      1: {
-        small: `${baseSpacing - 20}px`,
-      }
-    }
-  }
-})
 
 const Layout = ({ pageContext: {pageType, locale, localessPath},  children }) => {
   const data = useStaticQuery(graphql`
@@ -109,34 +56,34 @@ const Layout = ({ pageContext: {pageType, locale, localessPath},  children }) =>
     <IntlProvider locale={locale}  messages={messages[locale]}>
       <LocaleProvider value={{currentLocale: locale}}>
         <PathProvider value={{localessPath}}>
-          <Grommet theme={theme}>
-              <Headroom
-                upTolerance={10}
-                downTolerance={10}
-                style={{zIndex: '20', height: '60px'}}
-              >
-                <Header pageType={pageType} siteTitle={data.site.siteMetadata.title} />
-              </Headroom>
-              <Box align='center' pad={{
-              }}>
-              <Box
-                width={'xlarge'}
-                pad={{ horizontal: 'large' }}
-              >
-                <main>{children}</main>
-                <Box as='footer' align='center'>
-                  <Box direction='row' align='center'>
-                    <FormattedMessage id='findUsOnSocial' defaultMessage='Find us on' />:
-                    <Button icon={<Facebook />} hoverIndicator href={facebookUrl} target="_blank" rel="noreferrer noopener" />
-                    <Button icon={<Twitter />} hoverIndicator href={twitterUrl} target="_blank" rel="noreferrer noopener" />
-                    <Button icon={<Slack />} hoverIndicator href="https://yaytips.slack.com" target="_blank" rel="noreferrer" />
-                  </Box>
-                  <Paragraph>© {new Date().getFullYear()}, Yay.tips</Paragraph>
+          <Grid>
+            <Headroom
+              upTolerance={10}
+              downTolerance={10}
+              style={{zIndex: '20', height: '60px'}}
+            >
+              <Header pageType={pageType} siteTitle={data.site.siteMetadata.title} />
+            </Headroom>
+            <Box align='center' pad={{
+            }}>
+            <Box
+              width={'xlarge'}
+              pad={{ horizontal: 'large' }}
+            >
+              <main>{children}</main>
+              <Box as='footer' align='center'>
+                <Box direction='row' align='center'>
+                  <FormattedMessage id='findUsOnSocial' defaultMessage='Find us on' />:
+                  <a href={facebookUrl} target="_blank" rel="noreferrer noopener">Facebook</a>
+                  <a href={twitterUrl} target="_blank" rel="noreferrer noopener">Twitter</a>
+                  <a href="https://yaytips.slack.com" target="_blank" rel="noreferrer">Slack</a>
                 </Box>
+                <Text>© {new Date().getFullYear()}, Yay.tips</Text>
               </Box>
             </Box>
-          </Grommet>
-        </PathProvider>
+          </Box>
+        </Grid>
+      </PathProvider>
       </LocaleProvider>
     </IntlProvider>
   )

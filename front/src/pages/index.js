@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { Box, Grid, ResponsiveContext } from 'grommet'
+import { Box, Grid } from 'theme-ui'
 
 import Layout from "../components/layout"
 import Img from "gatsby-image"
@@ -11,53 +11,41 @@ import { TipCard  } from '../components'
 const IndexPage = ({ pageContext, data }) => {
   return (
     <Layout pageContext={pageContext}>
-      <ResponsiveContext.Consumer>
-        {size => {
-          const columns = {
-            small: '',
-            medium: ['1/2', '1/2'],
-            large: ['1/2', '1/2'],
-            // large: { count: 'fill', size: 'small' },
-          }
-          return (
-            <Box pad={{ vertical: 'large' }}>
-              <SEO
-                titleMessageId={'indexPageTitle'}
-                descriptionMessageId={'indexPageDescription'}
-                lang={pageContext.locale}
-                type='website'
-                path={pageContext.pageUri}
-              />
-              <Hero />
-              <Box pad={{ top: 'xlarge' }}>
-                <Grid
-                  align="start"
-                  columns={columns[size]}
-                  gap="large"
-                >
-                  {data.allStrapiTip.edges.map(doc => {
-                    const isTipHasImage = doc.node.hasOwnProperty('image')
-                    let image = <div />
-                    if (isTipHasImage) {
-                      image = <Img
-                        alt={doc.node.title}
-                        fluid={doc.node.image.childImageSharp.fluid}
-                      />
-                    }
-                    return (
-                      <TipCard key={doc.id} tip={{
-                          title: doc.node.title,
-                          image,
-                          slug: doc.node.slug,
-                        }}
-                      />
-                    )
-                  })}
-                </Grid>
-              </Box>
-            </Box>
-          )}}
-      </ResponsiveContext.Consumer>
+      <Box>
+        <SEO
+          titleMessageId={'indexPageTitle'}
+          descriptionMessageId={'indexPageDescription'}
+          lang={pageContext.locale}
+          type='website'
+          path={pageContext.pageUri}
+        />
+        <Hero />
+        <Box>
+          <Grid>
+            {data.allStrapiTip.edges.map(doc => {
+              const isTipHasImage = doc.node.hasOwnProperty('image')
+              let image = <div />
+                if (isTipHasImage) {
+                  image = <Img
+                    alt={doc.node.title}
+                    fluid={doc.node.image.childImageSharp.fluid}
+                  />
+                }
+              return (
+                <Box key={doc.id}>
+                  <TipCard
+                    tip={{
+                      title: doc.node.title,
+                      image,
+                      slug: doc.node.slug,
+                    }}
+                  />
+                </Box>
+              )
+            })}
+          </Grid>
+        </Box>
+      </Box>
     </Layout>
   )
 }
