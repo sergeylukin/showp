@@ -3,13 +3,12 @@ import { graphql } from 'gatsby'
 
 import Layout from '../components/layout'
 
-import "../styles/global.css"
 import Link from "../components/localizedLink"
 import SEO from "../components/seo"
 
 const UserTemplate = ({ pageContext, data }) => {
   return (
-    <Layout  pageContext={pageContext}>
+    <Layout pageContext={pageContext}>
       <SEO
         title={`Author page of ${data.strapiUser.username}`}
         titleMessageId={'authorPageTitle'}
