@@ -1,3 +1,5 @@
+/** @jsx jsx */
+import { jsx } from 'theme-ui'
 import React from 'react'
 import { Link } from 'gatsby'
 
@@ -11,5 +13,13 @@ export default ({ to, locale, ...props }) => {
   const ISO_639_1 = locales[locale].path
   const path = locales[locale].default ? to : `/${ISO_639_1}${to}`
 
-  return <Link {...props} to={path} />
+  return <Link {...props} to={path}
+    activeClassName='active'
+    sx={{
+      color: 'inherit',
+      '&.active': {
+        color: 'primary',
+      }
+    }}
+  />
 }

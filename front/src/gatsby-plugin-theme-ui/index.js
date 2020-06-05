@@ -5,23 +5,27 @@ export default {
   colors: {
     text: '#000',
     background: '#fff',
-    primary: '#07c',
+    primary: '#f6c338',
+    gray: '#ccc',
     modes: {
       dark: {
         text: '#fff',
         background: '#000',
-        primary: '#0cf',
+        primary: 'blue',
+        gray: 'white',
       }
     }
   },
+  sizes: {
+    container: 1278,
+  },
   fonts: {
-    body: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
-    heading: 'Georgia, serif',
+    body: ' system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
+    heading: '"Source Sans Pro", Georgia, serif',
     monospace: 'Menlo, monospace',
   },
-  fontSizes: [
-    12, 14, 16, 20, 24, 32, 48, 64
-  ],
+  fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 72],
+  space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
   fontWeights: {
     body: 400,
     heading: 700,
@@ -41,6 +45,12 @@ export default {
       fontFamily: 'body',
       lineHeight: 'body',
       fontWeight: 'body',
+    },
+    navlink: {
+      color: 'primary',
+      '&:hover': {
+        color: 'text',
+      }
     },
     h1: {
       variant: 'text.heading',
@@ -91,6 +101,12 @@ export default {
       borderBottomStyle: 'solid',
     },
   },
+  forms: {
+    select: {
+      p: 2,
+      mr: 1
+    }
+  },
   buttons: {
     primary: {
       color: 'background',
@@ -102,6 +118,19 @@ export default {
     secondary: {
       color: 'background',
       bg: 'secondary',
+    },
+  },
+  cards: {
+    primary: {
+      padding: 2,
+      borderRadius: 4,
+      boxShadow: '0 0 8px rgba(0, 0, 0, 0.125)',
+    },
+    compact: {
+      padding: 1,
+      borderRadius: 2,
+      border: '1px solid',
+      borderColor: 'muted',
     },
   },
 }

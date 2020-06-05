@@ -11,41 +11,37 @@ import { TipCard  } from '../components'
 const IndexPage = ({ pageContext, data }) => {
   return (
     <Layout pageContext={pageContext}>
-      <Box>
-        <SEO
-          titleMessageId={'indexPageTitle'}
-          descriptionMessageId={'indexPageDescription'}
-          lang={pageContext.locale}
-          type='website'
-          path={pageContext.pageUri}
-        />
-        <Hero />
-        <Box>
-          <Grid>
-            {data.allStrapiTip.edges.map(doc => {
-              const isTipHasImage = doc.node.hasOwnProperty('image')
-              let image = <div />
-                if (isTipHasImage) {
-                  image = <Img
-                    alt={doc.node.title}
-                    fluid={doc.node.image.childImageSharp.fluid}
-                  />
-                }
-              return (
-                <Box key={doc.id}>
-                  <TipCard
-                    tip={{
-                      title: doc.node.title,
-                      image,
-                      slug: doc.node.slug,
-                    }}
-                  />
-                </Box>
-              )
-            })}
-          </Grid>
-        </Box>
-      </Box>
+      <SEO
+        titleMessageId={'indexPageTitle'}
+        descriptionMessageId={'indexPageDescription'}
+        lang={pageContext.locale}
+        type='website'
+        path={pageContext.pageUri}
+      />
+      <Hero />
+      <Grid>
+        {data.allStrapiTip.edges.map(doc => {
+          const isTipHasImage = doc.node.hasOwnProperty('image')
+          let image = <div />
+            if (isTipHasImage) {
+              image = <Img
+                alt={doc.node.title}
+                fluid={doc.node.image.childImageSharp.fluid}
+              />
+            }
+          return (
+            <Box key={doc.id}>
+              <TipCard
+                tip={{
+                  title: doc.node.title,
+                  image,
+                  slug: doc.node.slug,
+                }}
+              />
+            </Box>
+          )
+        })}
+      </Grid>
     </Layout>
   )
 }

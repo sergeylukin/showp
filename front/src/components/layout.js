@@ -1,17 +1,12 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
+/** @jsx jsx */
+import { jsx } from 'theme-ui'
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import { IntlProvider } from 'react-intl'
 import Headroom from 'react-headroom'
 import { FormattedMessage } from 'react-intl'
-import { Text, Grid, Box } from 'theme-ui'
+import { Text, Box } from 'theme-ui'
 
 import Header from "./header"
 import "./layout.css"
@@ -33,6 +28,16 @@ const {
 } = PathContext
 
 const baseSpacing = 23
+
+const Container = props =>
+  <div
+    {...props}
+    sx={{
+      maxWidth: 'container',
+      mx: 'auto',
+      px: 3,
+    }}
+  />
 
 const Layout = ({ pageContext: {pageType, locale, localessPath},  children }) => {
   const data = useStaticQuery(graphql`
@@ -56,36 +61,64 @@ const Layout = ({ pageContext: {pageType, locale, localessPath},  children }) =>
     <IntlProvider locale={locale}  messages={messages[locale]}>
       <LocaleProvider value={{currentLocale: locale}}>
         <PathProvider value={{localessPath}}>
-          <Grid>
-            <Headroom
-              upTolerance={10}
-              downTolerance={10}
-              style={{zIndex: '20', height: '60px'}}
-            >
-              <Header pageType={pageType} siteTitle={data.site.siteMetadata.title} />
-            </Headroom>
-            <Box align='center' pad={{
+          <div
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              minHeight: '100vh',
             }}>
-            <Box
-              width={'xlarge'}
-              pad={{ horizontal: 'large' }}
-            >
-              <main>{children}</main>
-              <Box as='footer' align='center'>
-                <Box direction='row' align='center'>
-                  <FormattedMessage id='findUsOnSocial' defaultMessage='Find us on' />:
-                  <a href={facebookUrl} target="_blank" rel="noreferrer noopener">Facebook</a>
-                  <a href={twitterUrl} target="_blank" rel="noreferrer noopener">Twitter</a>
-                  <a href="https://yaytips.slack.com" target="_blank" rel="noreferrer">Slack</a>
-                </Box>
-                <Text>© {new Date().getFullYear()}, Yay.tips</Text>
-              </Box>
-            </Box>
-          </Box>
-        </Grid>
+            <header
+              sx={{
+                width: '100%',
+              }}>
+              <Headroom
+                upTolerance={10}
+                downTolerance={10}
+                style={{zIndex: '20', height: '60px'}}
+              >
+                <div sx={{
+                  width: '100%',
+                  background: 'white',
+                  borderBottomWidth: '1px',
+                  borderBottomStyle: 'solid',
+                  borderBottomColor: 'gray'
+                }}>
+                <Container>
+                  <Header pageType={pageType} siteTitle={data.site.siteMetadata.title} />
+                </Container>
+              </div>
+            </Headroom>
+          </header>
+          <main
+            sx={{
+              width: '100%',
+              flex: '1 1 auto',
+            }}>
+            <Container>
+              {children}
+            </Container>
+          </main>
+          <Container>
+            <footer
+              sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                p: 2,
+                variant: 'styles.footer',
+              }}>
+              <FormattedMessage id='findUsOnSocial' defaultMessage='Find us on' />:
+              <a href={facebookUrl} target="_blank" rel="noreferrer noopener" sx={{ variant: 'styles.navlink', p: 2 }}>Facebook</a>
+              <a href={twitterUrl} target="_blank" rel="noreferrer noopener" sx={{ variant: 'styles.navlink', p: 2 }}>Twitter</a>
+              <a href="https://yaytips.slack.com" target="_blank" rel="noreferrer" sx={{ variant: 'styles.navlink', p: 2 }}>Slack</a>
+              <div sx={{ mx: 'auto' }} />
+              <Text sx={{ p: 2 }}>© {new Date().getFullYear()}, Yay.tips</Text>
+            </footer>
+          </Container>
+        </div>
       </PathProvider>
-      </LocaleProvider>
-    </IntlProvider>
+    </LocaleProvider>
+  </IntlProvider>
   )
 }
 

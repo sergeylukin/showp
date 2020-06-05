@@ -1,3 +1,5 @@
+/** @jsx jsx */
+import { jsx } from 'theme-ui'
 import React from "react"
 import { Select } from 'theme-ui';
 import { navigate } from "gatsby"
