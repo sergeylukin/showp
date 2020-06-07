@@ -6,6 +6,7 @@ import { Box } from 'theme-ui';
 
 import Link from "./localizedLink"
 import LanguageSelector from "./languageSelector"
+import ColorSwitch from "./colorSwitch"
 
 import logo from "../images/logo.png"
 
@@ -24,6 +25,7 @@ const Header = ({ pageType, siteTitle }) => (
       <img src={logo} sx={{mb: 0, mt: 2}} width={100} height={31} alt="Yay.tips logo" />
     </Link>
     <div sx={{ mx: 'auto' }} />
+    <ColorSwitch />
     <Box
       sx={{
         variant: 'styles.navlink',

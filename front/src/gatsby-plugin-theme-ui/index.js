@@ -11,7 +11,7 @@ export default {
       dark: {
         text: '#fff',
         background: '#000',
-        primary: 'blue',
+        primary: 'white',
         gray: 'white',
       }
     }
