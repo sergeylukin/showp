@@ -10,132 +10,122 @@ const path = require(`path`);
 
 const locales = require('./src/constants/locales')
 
-const makeRequest = (graphql, request) => new Promise((resolve, reject) => {
-  // Query for nodes to use in creating pages.
-  resolve(
-    graphql(request).then(result => {
-      if (result.errors) {
-        reject(result.errors);
-      }
-
-      return result;
-    })
-  );
-});
-
 // Implement the Gatsby API “createPages”. This is called once the
 // data layer is bootstrapped to let plugins create pages from data.
-exports.createPages = ({ actions, graphql }) => {
-  const { createPage } = actions;
+exports.createPages = async ({ graphql, actions, reporter }) => {
+  const { createPage } = actions
 
-  const getTips = makeRequest(graphql, `
-    {
-      allStrapiTip(filter: {isPublished: {eq: "Yes"}}) {
-        edges {
-          node {
-            id
-            slug
-            locale {
+  const tips = await graphql(
+    `
+      {
+        allStrapiTip(filter: {isPublished: {eq: "Yes"}}) {
+          edges {
+            node {
               id
-              code
+              slug
+              locale {
+                id
+                code
+              }
             }
           }
         }
       }
-    }
-    `).then(result => {
-    // Create pages for each tip.
-    result.data.allStrapiTip.edges.forEach(({ node }) => {
-      Object.keys(locales).map(locale => {
-        if (!node || !node.locale || node.locale.code !== locale) return null
-        const url = `/${node.slug}`
-        const localizedPath = locales[locale].default
-          ? url
-          : `/${locales[locale].path}${url}`
+    `
+  )
+  // Handle errors
+  if (tips.errors) {
+    reporter.panicOnBuild(`Error while running Tips GraphQL query.`)
+    return
+  }
+  // Create pages for each markdown file.
+  const tipPageTemplate = path.resolve(`src/templates/tip.js`)
+  tips.data.allStrapiTip.edges.forEach(({ node }) => {
+    Object.keys(locales).map(locale => {
+      if (!node || !node.locale || node.locale.code !== locale) return null
+      const url = `/${node.slug}`
+      const localizedPath = locales[locale].default
+        ? url
+        : `/${locales[locale].path}${url}`
 
-        return createPage({
-          path: localizedPath,
-          component: path.resolve(`src/templates/tip.js`),
-          context: {
-            id: node.id,
-            locale,
-            localessPath: url,
-            pageType: 'tip',
-            pageUri: localizedPath
-          },
-        });
-      })
-    });
-  });
+      createPage({
+        path: localizedPath,
+        component: tipPageTemplate,
+        context: {
+          id: node.id,
+          locale,
+          localessPath: url,
+          pageType: 'tip',
+          pageUri: localizedPath
+        },
+      });
+    })
+  })
 
-  const getAuthors = makeRequest(graphql, `
-    {
-      allStrapiUser {
-        edges {
-          node {
-            id
-            username
+  const authors = await graphql(
+    `
+      {
+        allStrapiUser {
+          edges {
+            node {
+              id
+              username
+            }
           }
         }
       }
-    }
-    `).then(result => {
-    // Create pages for each user.
-    result.data.allStrapiUser.edges.forEach(({ node }) => {
-      Object.keys(locales).map(locale => {
-        const url = `/${node.username}`
-        const localizedPath = locales[locale].default
-          ? url
-          : `/${locales[locale].path}${url}`
+    `
+  )
+  // Handle errors
+  if (authors.errors) {
+    reporter.panicOnBuild(`Error while running Authors GraphQL query.`)
+    return
+  }
+  const authorPageTemplate = path.resolve(`src/templates/author.js`)
+  authors.data.allStrapiUser.edges.forEach(({ node }) => {
+    Object.keys(locales).map(locale => {
+      const url = `/${node.username}`
+      const localizedPath = locales[locale].default
+        ? url
+        : `/${locales[locale].path}${url}`
 
-        const page = {
-          path: localizedPath,
-          component: path.resolve(`src/templates/author.js`),
-          context: {
-            id: node.id,
-            id_integer: parseInt(node.id.replace("User_", '')),
-            locale,
-            localessPath: url,
-            pageType: 'author',
-            pageUri: localizedPath
-          },
-        }
-
-        return createPage(page);
+      createPage({
+        path: localizedPath,
+        component: authorPageTemplate,
+        context: {
+          id: node.id,
+          id_integer: parseInt(node.id.replace("User_", '')),
+          locale,
+          localessPath: url,
+          pageType: 'author',
+          pageUri: localizedPath
+        },
       })
-    });
-  });
-
-  // Queries for tips and authors nodes to use in creating pages.
-  return Promise.all([
-    getTips,
-    getAuthors,
-  ]);
-};
+    })
+  })
+}
 
 exports.onCreatePage = ({ page, actions }) => {
   const { createPage, deletePage } = actions
 
-  return new Promise(resolve => {
-    deletePage(page)
+  const oldPage = Object.assign({}, page)
+  deletePage(oldPage)
 
-    Object.keys(locales).map(locale => {
-      const localizedPath = locales[locale].default
-        ? page.path
-        : `/${locales[locale].path}${page.path}`
+  Object.keys(locales).map(locale => {
+    const localizedPath = locales[locale].default
+      ? page.path
+      : `/${locales[locale].path}${page.path}`
 
-      return createPage({
-        ...page,
-        path: localizedPath,
-        context: {
-          locale,
-          localessPath: page.path,
-          pageType: 'common',
-          pageUri: localizedPath
-        }
-      })
+    createPage({
+      ...page,
+      path: localizedPath,
+      context: {
+        ...page.context,
+        locale,
+        localessPath: page.path,
+        pageType: 'common',
+        pageUri: localizedPath
+      }
     })
-
-    resolve()
   })
 }
