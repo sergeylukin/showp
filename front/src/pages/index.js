@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 import { Text, Box, Grid, Card } from 'theme-ui'
 
 import Layout from "../components/layout"
+import Container from "../components/container"
 import Img from "gatsby-image"
 import SEO from "../components/seo"
 import Hero from '../components/hero'
@@ -18,25 +19,35 @@ const IndexPage = ({ pageContext, data }) => {
         type='website'
         path={pageContext.pageUri}
       />
-      <Hero />
-      <Grid gap={3}
-        columns={[ 2, 3, 4 ]}>
-        {data.allStrapiTip.edges.map(doc => (
-          <Card variant="primary" key={doc.id}>
-            {doc.node.hasOwnProperty('image') && (
-              <Link to={`/${doc.node.slug}`}>
-                <Img
-                  alt={doc.node.title}
-                  fluid={doc.node.image.childImageSharp.fluid}
-                />
-              </Link>
-            )}
-            <Text mt={2} mx={2}>
-              {doc.node.title}
-            </Text>
-          </Card>
-        ))}
-      </Grid>
+      <Container>
+        <Hero />
+        <Grid gap={3}
+          columns={[ 2, 3, 4 ]}>
+          {data.allStrapiTip.edges.map(doc => (
+            <Card variant="primary" key={doc.id}>
+              {doc.node.hasOwnProperty('image') && (
+                <Link to={`/${doc.node.slug}`}>
+                  <Img
+                    alt={doc.node.title}
+                    fluid={doc.node.image.childImageSharp.fluid}
+                  />
+                </Link>
+              )}
+              <Text mt={2} mx={2}>
+                {doc.node.title}
+              </Text>
+            </Card>
+          ))}
+        </Grid>
+      </Container>
+      <div
+        sx={{
+          background: 'accent',
+          variant: 'layout.newsletter'
+        }}>
+        <Container>
+        </Container>
+      </div>
     </Layout>
   )
 }

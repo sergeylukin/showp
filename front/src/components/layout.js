@@ -9,7 +9,7 @@ import { FormattedMessage } from 'react-intl'
 import { Text, Flex, Box } from 'theme-ui'
 
 import Header from "./header"
-import "./layout.css"
+import Container from './container'
 
 // Messages
 import en_US from '../i18n/en-US.json'
@@ -28,16 +28,6 @@ const {
 } = PathContext
 
 const baseSpacing = 23
-
-const Container = props =>
-  <div
-    {...props}
-    sx={{
-      maxWidth: 'container',
-      mx: 'auto',
-      px: 3,
-    }}
-  />
 
 const Layout = ({ pageContext: {pageType, locale, localessPath},  children }) => {
   const data = useStaticQuery(graphql`
@@ -61,27 +51,24 @@ const Layout = ({ pageContext: {pageType, locale, localessPath},  children }) =>
     <IntlProvider locale={locale}  messages={messages[locale]}>
       <LocaleProvider value={{currentLocale: locale}}>
         <PathProvider value={{localessPath}}>
-          <div
+          <Flex
             sx={{
-              display: 'flex',
               flexDirection: 'column',
               minHeight: '100vh',
             }}>
-            <header
-              sx={{
-                width: '100%',
-              }}>
+            <header>
               <Headroom
                 upTolerance={10}
                 downTolerance={10}
-                style={{zIndex: '20', height: '60px'}}
+                style={{ zIndex: '20', height: '60px' }}
               >
                 <div sx={{
                   width: '100%',
-                  background: 'white',
+                  backgroundColor: 'background',
                   borderBottomWidth: '1px',
                   borderBottomStyle: 'solid',
-                  borderBottomColor: 'gray'
+                  borderBottomColor: 'muted',
+                  variant: 'layout.header'
                 }}>
                 <Container>
                   <Header pageType={pageType} siteTitle={data.site.siteMetadata.title} />
@@ -93,39 +80,34 @@ const Layout = ({ pageContext: {pageType, locale, localessPath},  children }) =>
             sx={{
               width: '100%',
               flex: '1 1 auto',
+              variant: 'layout.main',
             }}>
-            <Container>
-              {children}
-            </Container>
+            {children}
           </main>
-          <footer sx={{
-            width: '100%'
-          }}>
-          <Container>
-            <Flex
-              sx={{
-                flexWrap: 'wrap',
-                alignItems: 'center',
-                py: 4,
-                variant: 'styles.footer',
-                justifyContent: 'space-between',
-                maxWidth: 'container'
-              }}>
-              <Box>
-                <FormattedMessage id='findUsOnSocial' defaultMessage='Find us on' />:
-                <a href={facebookUrl} target="_blank" rel="noreferrer noopener" sx={{ variant: 'styles.navlink', p: 2 }}>Facebook</a>
-                <a href={twitterUrl} target="_blank" rel="noreferrer noopener" sx={{ variant: 'styles.navlink', p: 2 }}>Twitter</a>
-                <a href="https://yaytips.slack.com" target="_blank" rel="noreferrer" sx={{ variant: 'styles.navlink', p: 2 }}>Slack</a>
-              </Box>
-              <div sx={{ mx: 'auto' }} />
-              <Box><Text>© {new Date().getFullYear()}, Yay.tips</Text></Box>
-            </Flex>
-          </Container>
-        </footer>
-      </div>
-    </PathProvider>
-  </LocaleProvider>
-</IntlProvider>
+          <footer>
+            <Container>
+              <Flex
+                sx={{
+                  flexWrap: 'wrap',
+                  py: 4,
+                  justifyContent: 'space-between',
+                  maxWidth: 'container',
+                  variant: 'styles.footer'
+                }}>
+                <Box>
+                  <FormattedMessage id='findUsOnSocial' defaultMessage='Find us on' />:
+                  <a href={facebookUrl} target="_blank" rel="noreferrer noopener" sx={{ variant: 'styles.navlink', p: 2 }}>Facebook</a>
+                  <a href={twitterUrl} target="_blank" rel="noreferrer noopener" sx={{ variant: 'styles.navlink', p: 2 }}>Twitter</a>
+                  <a href="https://yaytips.slack.com" target="_blank" rel="noreferrer" sx={{ variant: 'styles.navlink', p: 2 }}>Slack</a>
+                </Box>
+                <Box><Text>© {new Date().getFullYear()}, Yay.tips</Text></Box>
+              </Flex>
+            </Container>
+          </footer>
+        </Flex>
+      </PathProvider>
+    </LocaleProvider>
+  </IntlProvider>
   )
 }
 

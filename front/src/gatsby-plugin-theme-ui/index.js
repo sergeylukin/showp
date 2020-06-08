@@ -6,13 +6,19 @@ export default {
     text: '#000',
     background: '#fff',
     primary: '#f6c338',
-    gray: '#ccc',
+    secondary: '#000',
+    muted: '#ccc',
+    highlight: 'tomato',
+    accent: 'turquoise',
     modes: {
       dark: {
-        text: '#fff',
-        background: '#000',
+        text: 'white',
+        background: 'black',
         primary: 'white',
-        gray: 'white',
+        secondary: 'white',
+        muted: 'white',
+        highlight: 'white',
+        accent: '#ccc',
       }
     }
   },
@@ -34,6 +40,18 @@ export default {
   lineHeights: {
     body: 1.5,
     heading: 1.125,
+  },
+  text: {
+    heading: {
+      fontFamily: 'heading',
+      lineHeight: 'heading',
+      fontWeight: 'heading',
+      color: 'secondary',
+    },
+    caps: {
+      textTransform: 'uppercase',
+      letterSpacing: '0.1em',
+    },
   },
   letterSpacings: {
     body: 'normal',

@@ -7,7 +7,7 @@ export default props => {
     <header>
       <Button
         sx={{
-          background: 'black'
+          backgroundColor: 'secondary'
         }}
         onClick={e => {
           setColorMode(colorMode === 'default' ? 'dark' : 'default')
