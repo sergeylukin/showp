@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 import React from 'react'
-import styled from "styled-components"
 import { Heading, Flex, Grid, Box, Input, Button } from 'theme-ui'
 import { FormattedMessage } from 'react-intl';
 
@@ -13,7 +12,7 @@ export default (props) => {
       <div sx={{
         display: 'grid',
         gridGap: 4,
-        py: 4,
+        pt: 4,
         px: 2
       }}>
       <Heading as='h1'
