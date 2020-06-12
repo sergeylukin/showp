@@ -36,12 +36,18 @@ const IndexPage = ({ pageContext, data }) => {
             {data.allStrapiTip.edges.map(doc => (
               <Card variant="primary" key={doc.id}>
                 {doc.node.hasOwnProperty('image') && (
-                  <Link to={`/${doc.node.slug}`}>
-                    <Img
-                      alt={doc.node.title}
-                      fluid={doc.node.image.childImageSharp.fluid}
-                    />
-                  </Link>
+                  <React.Fragment>
+                    { doc.node.image.childImageSharp ? (
+                      <Link to={`/${doc.node.slug}`}>
+                        <Img
+                          alt={doc.node.title}
+                          fluid={doc.node.image.childImageSharp.fluid}
+                        />
+                      </Link>
+                    ) : (
+                      <video src={doc.node.image.publicURL} width={370} height={370} controls />
+                    )}
+                  </React.Fragment>
                 )}
                 <Text mt={2} mx={2}>
                   {doc.node.title}
@@ -67,46 +73,6 @@ const IndexPage = ({ pageContext, data }) => {
             <Newsletter />
           </Container>
         </div>
-        <Container>
-          <Grid gap={4}
-            columns={[ 2, 3, 4 ]}>
-            {data.allStrapiTip.edges.map(doc => (
-              <Card variant="primary" key={doc.id}>
-                {doc.node.hasOwnProperty('image') && (
-                  <Link to={`/${doc.node.slug}`}>
-                    <Img
-                      alt={doc.node.title}
-                      fluid={doc.node.image.childImageSharp.fluid}
-                    />
-                  </Link>
-                )}
-                <Text mt={2} mx={2}>
-                  {doc.node.title}
-                </Text>
-              </Card>
-            ))}
-          </Grid>
-        </Container>
-        <Container>
-          <Grid gap={4}
-            columns={[ 2, 3, 4 ]}>
-            {data.allStrapiTip.edges.map(doc => (
-              <Card variant="primary" key={doc.id}>
-                {doc.node.hasOwnProperty('image') && (
-                  <Link to={`/${doc.node.slug}`}>
-                    <Img
-                      alt={doc.node.title}
-                      fluid={doc.node.image.childImageSharp.fluid}
-                    />
-                  </Link>
-                )}
-                <Text mt={2} mx={2}>
-                  {doc.node.title}
-                </Text>
-              </Card>
-            ))}
-          </Grid>
-        </Container>
       </Grid>
     </Layout>
   )
@@ -134,6 +100,7 @@ export const pageQuery = graphql`
                 ...GatsbyImageSharpFluid_withWebp
               }
             }
+            publicURL
           }
           content
         }
