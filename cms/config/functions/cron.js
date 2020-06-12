@@ -18,13 +18,13 @@ module.exports = {
   // '0 1 * * 1': () => {
   //
   // }
-  '*/1 * * * *': async() => {
+  '* * * * *': async() => {
     // console.log('I am running ' + new Date(), Object.keys(strapi.config));
     // console.log(strapi.models.tip.query({
     //   where: { isPublished: 'Yes' }
     // })[0].title);
     // await strapi.services.tip.publish();
-    return Tip.forge()
+    return strapi.models.tip.forge()
       .where({
         isPublished: 'No'
       })
