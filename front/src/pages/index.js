@@ -11,6 +11,7 @@ import SEO from "../components/seo"
 import Hero from '../components/hero'
 import Link from '../components/localizedLink'
 import Newsletter from '../components/newsletter'
+import Video from '../components/video'
 
 const IndexPage = ({ pageContext, data }) => {
   return (
@@ -45,7 +46,14 @@ const IndexPage = ({ pageContext, data }) => {
                         />
                       </Link>
                     ) : (
-                      <video src={doc.node.image.publicURL} width={370} height={370} controls />
+                      <div sx={{
+                      }}>
+                      <Video
+                        width={'100%'}
+                        videoSrcURL={doc.node.image.publicURL}
+                        videoTitle="Video rolik"
+                      />
+                    </div>
                     )}
                   </React.Fragment>
                 )}
