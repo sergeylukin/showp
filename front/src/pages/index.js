@@ -33,7 +33,7 @@ const IndexPage = ({ pageContext, data }) => {
         </Container>
         <Container>
           <Grid gap={4}
-            columns={[ 2, null, 4 ]}>
+            columns={[ 3, null, 4 ]}>
             {data.allStrapiTip.edges.map(doc => (
               <Card variant="primary" key={doc.id}>
                 {doc.node.hasOwnProperty('image') && (
